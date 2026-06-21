@@ -298,8 +298,10 @@
     }
     .espaco-row .eq { font-size: 15px; color: var(--white); font-weight: 700; }
     .espaco-row .eprices { text-align: right; }
-    .espaco-row .ep { font-size: 20px; font-weight: 900; color: var(--pp-orange); }
-    .espaco-row .eu { font-size: 12px; color: var(--gray); margin-top: 2px; }
+    .espaco-row .ep { font-size: 26px; font-weight: 900; color: var(--pp-orange); line-height: 1; }
+    .espaco-row .ep .ep-mes { font-size: 13px; font-weight: 600; color: rgba(244,123,32,0.75); }
+    .espaco-row .ep-total { font-size: 11px; color: var(--gray); margin-top: 4px; }
+    .espaco-row .eu { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
     .desc-badge {
       display: inline-block;
       background: rgba(100,237,149,0.15);
@@ -826,29 +828,29 @@
       <div class="espaco-row">
         <div class="eq">1 espaço</div>
         <div class="eprices">
-          <div class="ep">R$ 1.500</div>
-          <div class="eu">R$ 1.500/espaço</div>
+          <div class="ep">R$ 499,99<span class="ep-mes">/mês</span></div>
+          <div class="ep-total">Total: R$ 1.500 · campanha 3 meses</div>
         </div>
       </div>
       <div class="espaco-row destaque">
         <div class="eq">2 espaços <span class="desc-badge">-10%</span></div>
         <div class="eprices">
-          <div class="ep">R$ 2.700</div>
-          <div class="eu">R$ 1.350/cada</div>
+          <div class="ep">R$ 899,99<span class="ep-mes">/mês</span></div>
+          <div class="ep-total">Total: R$ 2.700 · R$ 449,99/espaço/mês</div>
         </div>
       </div>
       <div class="espaco-row">
         <div class="eq">4 espaços <span class="desc-badge">-15%</span></div>
         <div class="eprices">
-          <div class="ep">R$ 5.100</div>
-          <div class="eu">R$ 1.275/cada</div>
+          <div class="ep">R$ 1.699,99<span class="ep-mes">/mês</span></div>
+          <div class="ep-total">Total: R$ 5.100 · R$ 424,99/espaço/mês</div>
         </div>
       </div>
       <div class="espaco-row">
         <div class="eq">6 espaços <span class="desc-badge">-20%</span></div>
         <div class="eprices">
-          <div class="ep">R$ 7.200</div>
-          <div class="eu">R$ 1.200/cada</div>
+          <div class="ep">R$ 2.399,99<span class="ep-mes">/mês</span></div>
+          <div class="ep-total">Total: R$ 7.200 · R$ 399,99/espaço/mês</div>
         </div>
       </div>
     </div>
@@ -889,18 +891,4 @@
     <h2>Pronto para levar sua<br>marca para <span>Cotia</span>?</h2>
     <p>Vagas limitadas por campanha — garantimos exclusividade de segmento no saquinho. Entre em contato e reserve o seu espaço agora.</p>
     <a href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Tenho%20interesse%20em%20anunciar%20na%20PremiaPão%20em%20Cotia.%20Pode%20me%20contar%20mais%20sobre%20os%20espaços%20disponíveis%3F" target="_blank" class="btn-wpp">
-      <svg class="wpp-icon" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.543 4.07 1.494 5.788L0 24l6.388-1.676A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.848 0-3.569-.497-5.047-1.363l-.362-.215-3.746.982.999-3.648-.236-.374A9.808 9.808 0 012.182 12c0-5.422 4.396-9.818 9.818-9.818 5.422 0 9.818 4.396 9.818 9.818 0 5.422-4.396 9.818-9.818 9.818z"/></svg>
-      Quero garantir meu espaço
-    </a>
-    <div class="cta-sub">Resposta em até 1h · João Dini · 11 98953-1711</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <span>PremiaPão</span> · Cotia / Granja Viana · 2026<br>
-  <span style="color:var(--gray);font-weight:400;">Microfranquia de publicidade em saquinhos de pão</span>
-</footer>
-
-</body>
-</html>
+      <svg class="wpp-icon" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.543 4.07 1.494 5.788L0 24l6.388-1.676A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.848 0-3.569-.497-5.047-1.363l-.362-.215-3.746.982.999-3.648-.236-.374A9.808 9.808 0 012.
