@@ -396,6 +396,114 @@
     footer span { color: var(--pp-orange); font-weight: 700; }
 
     /* IBIUNA RESULTADOS */
+
+    /* SOBRE A PREMIAPÃO */
+    .pp-about-section {
+      background: var(--mid);
+      padding: 64px 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pp-about-inner { max-width: 760px; margin: 0 auto; }
+
+    .pp-numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    @media(min-width:560px) { .pp-numbers-grid { grid-template-columns: repeat(4, 1fr); } }
+    .pp-number-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .pp-number {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--pp-orange);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pp-number-label { font-size: 11px; color: var(--gray); line-height: 1.4; }
+
+    .pp-brands-block, .pp-midia-block { margin-bottom: 28px; }
+    .pp-brands-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    .pp-brands-row, .pp-midia-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pp-brand-pill {
+      background: rgba(244,123,32,0.08);
+      border: 1px solid rgba(244,123,32,0.2);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+    .pp-midia-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .pp-trust-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    @media(min-width:560px) { .pp-trust-row { grid-template-columns: 1fr 1fr; } }
+    .pp-trust-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .pp-trust-icon { font-size: 24px; flex-shrink: 0; }
+    .pp-trust-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .pp-trust-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+    .pp-local-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(244,123,32,0.08), rgba(230,48,39,0.05));
+      border: 1px solid rgba(244,123,32,0.25);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .pp-local-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pp-orange), var(--pp-red));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 900; color: #fff;
+      flex-shrink: 0;
+    }
+    .pp-local-name { font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+    .pp-local-role { font-size: 11px; color: var(--pp-orange); font-weight: 600; margin-bottom: 8px; letter-spacing: 0.3px; }
+    .pp-local-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+
     .ibiuna-section {
       background: var(--mid);
       border-top: 1px solid var(--border);
@@ -483,6 +591,104 @@
     <div class="stat-label">Padarias</div>
   </div>
 </div>
+
+<!-- SOBRE A PREMIAPÃO -->
+<div class="pp-about-section" id="sobre">
+  <div class="pp-about-inner">
+
+    <!-- Logo + headline -->
+    <div style="text-align:center; margin-bottom:40px;">
+      <img src="https://premiapao.com.br/wp-content/uploads/2024/02/Asset-5-170x45.png" alt="PremiaPão" style="height:40px; margin-bottom:20px; opacity:0.95;" onerror="this.style.display='none'">
+      <div>
+        <span class="section-tag">A empresa por trás da campanha</span>
+        <h2 style="font-size:clamp(22px,5vw,36px);font-weight:900;line-height:1.2;margin-top:10px;">
+          A <span style="color:var(--pp-orange)">#1</span> em publicidade<br>em saquinhos de pão do Brasil
+        </h2>
+        <p style="color:var(--gray);font-size:15px;line-height:1.65;max-width:540px;margin:16px auto 0;">
+          Microfranquia nacional com presença em todo o Brasil, premiada pela ABF e destaque nos principais veículos de mídia do país.
+        </p>
+      </div>
+    </div>
+
+    <!-- Numbers -->
+    <div class="pp-numbers-grid">
+      <div class="pp-number-card">
+        <div class="pp-number">+15 mil</div>
+        <div class="pp-number-label">anunciantes no Brasil</div>
+      </div>
+      <div class="pp-number-card">
+        <div class="pp-number">6</div>
+        <div class="pp-number-label">selos de excelência ABF</div>
+      </div>
+      <div class="pp-number-card">
+        <div class="pp-number">120 mil</div>
+        <div class="pp-number-label">impressões por tiragem</div>
+      </div>
+      <div class="pp-number-card">
+        <div class="pp-number">1.400</div>
+        <div class="pp-number-label">árvores plantadas 🌱</div>
+      </div>
+    </div>
+
+    <!-- Big brands -->
+    <div class="pp-brands-block">
+      <p class="pp-brands-label">Grandes marcas que já anunciaram</p>
+      <div class="pp-brands-row">
+        <span class="pp-brand-pill">🥩 Sadia</span>
+        <span class="pp-brand-pill">🚗 Nissan</span>
+        <span class="pp-brand-pill">🚙 Jeep</span>
+        <span class="pp-brand-pill">📱 Vivo</span>
+        <span class="pp-brand-pill">🧈 Qualy</span>
+        <span class="pp-brand-pill">🌸 O Boticário</span>
+        <span class="pp-brand-pill">🧀 Delícia</span>
+        <span class="pp-brand-pill">🍗 Perdigão</span>
+        <span class="pp-brand-pill">🏋️ SmartFit</span>
+        <span class="pp-brand-pill">💪 SelFit</span>
+        <span class="pp-brand-pill">🍫 Cacau Show</span>
+      </div>
+    </div>
+
+    <!-- Na mídia -->
+    <div class="pp-midia-block">
+      <p class="pp-brands-label">Destaque nos principais veículos do Brasil</p>
+      <div class="pp-midia-row">
+        <div class="pp-midia-pill">📺 Globo · PEGN</div>
+        <div class="pp-midia-pill">📡 TV Band</div>
+        <div class="pp-midia-pill">🏢 Sebrae</div>
+      </div>
+    </div>
+
+    <!-- Eco + ABF -->
+    <div class="pp-trust-row">
+      <div class="pp-trust-card">
+        <div class="pp-trust-icon">🌱</div>
+        <div>
+          <div class="pp-trust-title">Mídia ecológica</div>
+          <div class="pp-trust-desc">Tintas atóxicas, sem desperdício. A cada produção plantamos uma árvore nativa em parceria com a ONG Iniciativa Verde.</div>
+        </div>
+      </div>
+      <div class="pp-trust-card">
+        <div class="pp-trust-icon">🏆</div>
+        <div>
+          <div class="pp-trust-title">Premiada pela ABF</div>
+          <div class="pp-trust-desc">Única microfranquia de publicidade em saquinho de pão com 6 selos de excelência da Associação Brasileira de Franchising.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- João local -->
+    <div class="pp-local-block">
+      <div class="pp-local-avatar">JD</div>
+      <div>
+        <div class="pp-local-name">João Dini</div>
+        <div class="pp-local-role">Franqueado PremiaPão · Cotia / Granja Viana</div>
+        <div class="pp-local-desc">Moro e trabalho em Cotia. Conheço o bairro, as padarias e o público. Estou aqui pra garantir que sua campanha funcione de verdade — do início ao fim.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <!-- COMO FUNCIONA -->
 <div class="section">
@@ -805,6 +1011,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- INVESTIMENTO -->
 <div class="invest-section">
