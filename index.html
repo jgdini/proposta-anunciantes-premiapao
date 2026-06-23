@@ -504,6 +504,89 @@
     .pp-local-desc { font-size: 13px; color: var(--gray); line-height: 1.55; }
 
 
+
+    /* FLOATING EU QUERO */
+    .float-wpp {
+      position: fixed;
+      bottom: 28px; right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25D366, #1EB85A);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 13px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .float-wpp:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(37,211,102,0.55); }
+    .float-wpp svg { width:20px; height:20px; flex-shrink:0; }
+
+    /* BRAND CAROUSEL */
+    .brand-carousel-wrap {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      margin-bottom: 28px;
+    }
+    .brand-track {
+      display: flex;
+      width: max-content;
+      animation: brand-scroll 28s linear infinite;
+      gap: 0;
+    }
+    .brand-track:hover { animation-play-state: paused; }
+    @keyframes brand-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .brand-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 28px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      min-width: 120px;
+    }
+    .brand-logo-item img {
+      height: 28px;
+      width: auto;
+      max-width: 90px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .brand-logo-item img:hover { opacity: 1; }
+    .brand-logo-item .brand-text { font-size:13px; font-weight:800; color:rgba(255,255,255,0.7); letter-spacing:0.8px; text-transform:uppercase; white-space:nowrap; font-family:-apple-system,sans-serif; }
+
+    /* MIDIA LINKS */
+    .pp-midia-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pp-midia-link:hover {
+      border-color: var(--pp-orange);
+      color: var(--white);
+    }
+    .pp-midia-link .ext-icon { font-size: 10px; opacity: 0.5; }
+
+
     .ibiuna-section {
       background: var(--mid);
       border-top: 1px solid var(--border);
@@ -561,8 +644,7 @@
 <div class="hero">
   <div class="hero-badge">Publicidade Local · Cotia &amp; Granja Viana · 2026</div>
   <div class="logo-pill">
-    <div class="logo-dot"></div>
-    <span class="logo-text">PremiaPão</span>
+    <img src="https://premiapao.com.br/wp-content/uploads/2024/02/Asset-5-170x45.png" alt="PremiaPão" style="height:22px;opacity:0.95;" onerror="this.outerHTML='<span class=&quot;logo-text&quot;>PremiaPão</span>'">
   </div>
   <h1>Sua marca<br><span>dentro da casa</span> do cliente</h1>
   <p class="hero-sub">Seu anúncio vai dentro do saquinho de pão que a família compra na padaria e leva pra casa — 30.000 saquinhos, 120.000 impressões em 90 dias em Cotia.</p>
@@ -602,7 +684,7 @@
       <div>
         <span class="section-tag">A empresa por trás da campanha</span>
         <h2 style="font-size:clamp(22px,5vw,36px);font-weight:900;line-height:1.2;margin-top:10px;">
-          A <span style="color:var(--pp-orange)">#1</span> em publicidade<br>em saquinhos de pão do Brasil
+          A <span style="color:var(--pp-orange)">MAIOR</span> EM PUBLICIDADE<br>EM SAQUINHOS DE PÃO DO BRASIL
         </h2>
         <p style="color:var(--gray);font-size:15px;line-height:1.65;max-width:540px;margin:16px auto 0;">
           Microfranquia nacional com presença em todo o Brasil, premiada pela ABF e destaque nos principais veículos de mídia do país.
@@ -633,28 +715,42 @@
     <!-- Big brands -->
     <div class="pp-brands-block">
       <p class="pp-brands-label">Grandes marcas que já anunciaram</p>
-      <div class="pp-brands-row">
-        <span class="pp-brand-pill">🥩 Sadia</span>
-        <span class="pp-brand-pill">🚗 Nissan</span>
-        <span class="pp-brand-pill">🚙 Jeep</span>
-        <span class="pp-brand-pill">📱 Vivo</span>
-        <span class="pp-brand-pill">🧈 Qualy</span>
-        <span class="pp-brand-pill">🌸 O Boticário</span>
-        <span class="pp-brand-pill">🧀 Delícia</span>
-        <span class="pp-brand-pill">🍗 Perdigão</span>
-        <span class="pp-brand-pill">🏋️ SmartFit</span>
-        <span class="pp-brand-pill">💪 SelFit</span>
-        <span class="pp-brand-pill">🍫 Cacau Show</span>
+        <div class="brand-carousel-wrap">
+      <div class="brand-track">
+<div class="brand-logo-item"><span class="brand-text">Sadia</span></div>
+<div class="brand-logo-item"><span class="brand-text">Nissan</span></div>
+<div class="brand-logo-item"><span class="brand-text">Jeep</span></div>
+<div class="brand-logo-item"><span class="brand-text">Vivo</span></div>
+<div class="brand-logo-item"><span class="brand-text">Qualy</span></div>
+<div class="brand-logo-item"><span class="brand-text">O Boticário</span></div>
+<div class="brand-logo-item"><span class="brand-text">Delícia</span></div>
+<div class="brand-logo-item"><span class="brand-text">Perdigão</span></div>
+<div class="brand-logo-item"><span class="brand-text">SmartFit</span></div>
+<div class="brand-logo-item"><span class="brand-text">SelFit</span></div>
+<div class="brand-logo-item"><span class="brand-text">Cacau Show</span></div>
+<div class="brand-logo-item"><span class="brand-text">Sadia</span></div>
+<div class="brand-logo-item"><span class="brand-text">Nissan</span></div>
+<div class="brand-logo-item"><span class="brand-text">Jeep</span></div>
+<div class="brand-logo-item"><span class="brand-text">Vivo</span></div>
+<div class="brand-logo-item"><span class="brand-text">Qualy</span></div>
+<div class="brand-logo-item"><span class="brand-text">O Boticário</span></div>
+<div class="brand-logo-item"><span class="brand-text">Delícia</span></div>
+<div class="brand-logo-item"><span class="brand-text">Perdigão</span></div>
+<div class="brand-logo-item"><span class="brand-text">SmartFit</span></div>
+<div class="brand-logo-item"><span class="brand-text">SelFit</span></div>
+<div class="brand-logo-item"><span class="brand-text">Cacau Show</span></div>
       </div>
+    </div>
+    </div>
     </div>
 
     <!-- Na mídia -->
     <div class="pp-midia-block">
       <p class="pp-brands-label">Destaque nos principais veículos do Brasil</p>
       <div class="pp-midia-row">
-        <div class="pp-midia-pill">📺 Globo · PEGN</div>
-        <div class="pp-midia-pill">📡 TV Band</div>
-        <div class="pp-midia-pill">🏢 Sebrae</div>
+        <a href="https://revistapegn.globo.com/Negocios/noticia/2018/02/negocio-de-sacos-de-paes-rende-r-6-milhoes-para-empresario-por-ano.html" target="_blank" class="pp-midia-link">📺 Globo · PEGN <span class="ext-icon">↗</span></a>
+        <a href="https://www.youtube.com/watch?v=UiHfOim4ajA" target="_blank" class="pp-midia-link">📡 TV Band <span class="ext-icon">↗</span></a>
+        <a href="https://www.youtube.com/watch?v=XmbHe07Q5MI" target="_blank" class="pp-midia-link">🏢 Sebrae <span class="ext-icon">↗</span></a>
       </div>
     </div>
 
@@ -992,7 +1088,7 @@
 <!-- CLIENTES -->
 <div class="section">
   <span class="section-tag">Quem já anuncia</span>
-  <h2>Negócios locais que confiam na PremiaPão</h2>
+  <h2>Negócios locais que confiam na <img src="https://premiapao.com.br/wp-content/uploads/2024/02/Asset-5-170x45.png" alt="PremiaPão" style="height:18px;vertical-align:middle;margin-left:4px;opacity:0.9;" onerror="this.outerHTML='PremiaPão'"></h2>
   <p class="section-desc">Empresas de Cotia já testaram e aprovaram. Agora é a sua vez de levar sua marca para a mesa do cliente.</p>
   <div class="clientes-grid">
     <div class="cliente-card">
@@ -1092,11 +1188,19 @@
   </div>
 </div>
 
+
 <!-- CTA FINAL -->
 <div class="cta-section">
   <div style="max-width:560px;margin:0 auto;">
     <div style="font-size:40px;margin-bottom:16px;">☕</div>
     <h2>Pronto para levar sua<br>marca para <span>Cotia</span>?</h2>
     <p>Vagas limitadas por campanha — garantimos exclusividade de segmento no saquinho. Entre em contato e reserve o seu espaço agora.</p>
-    <a href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Tenho%20interesse%20em%20anunciar%20na%20PremiaPão%20em%20Cotia.%20Pode%20me%20contar%20mais%20sobre%20os%20espaços%20disponíveis%3F" target="_blank" class="btn-wpp">
-      <svg class="wpp-icon" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.543 4.07 1.494 5.788L0 24l6.388-1.676A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.848 0-3.569-.497-5.047-1.363l-.362-.215-3.746.982.999-3.648-.236-.374A9.808 9.808 0 012.
+    <a href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Tenho%20interesse%20em%20anunciar%20na%20PremiaPão%20em%20Cotia.%20Pode%20me%20contar%20mais%20sobre%20os%20espa%C3%A7os%20dispon%C3%ADveis%3F" target="_blank" class="btn-wpp">
+      <svg viewBox="0 0 24 24" fill="#fff" style="width:20px;height:20px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Falar com João agora
+    </a>
+  </div>
+</div>
+
+<a href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Vi%20a%20proposta%20da%20PremiaPão%20e%20quero%20saber%20mais%20sobre%20anunciar%20em%20Cotia." target="_blank" class="float-wpp"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> EU QUERO</a>
+</html>
