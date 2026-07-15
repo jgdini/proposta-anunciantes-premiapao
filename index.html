@@ -283,6 +283,35 @@
     }
     footer img { height: 20px; opacity: 0.35; display: block; margin: 0 auto 8px; }
 
+
+    /* COTIA NUMBERS */
+    .cotia-bar {{ background: var(--white); border-bottom: 1px solid var(--border); padding: 72px 0; }}
+    .cotia-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+      margin-top: 40px;
+    }}
+    .cotia-stat {{
+      padding: 36px 24px; text-align: center; background: var(--white);
+    }}
+    .cotia-n {{
+      display: block;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700; color: var(--orange);
+      letter-spacing: -1.5px; line-height: 1;
+    }}
+    .cotia-u {{ font-size: 18px; font-weight: 400; }}
+    .cotia-l {{
+      display: block; margin-top: 8px;
+      font-size: 13px; color: var(--sub);
+    }}
+    .cotia-note {{
+      margin-top: 20px; text-align: center;
+      font-size: 12px; color: var(--lite);
+    }}
+
     /* RESPONSIVE */
     @media (max-width: 640px) {
       .hero-imgs {
@@ -387,6 +416,51 @@
       <div class="stat">
         <span class="stat-n">+1.400</span>
         <span class="stat-l">Árvores plantadas</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── NÚMEROS COTIA ─── -->
+<div class="cotia-bar">
+  <div class="wrap">
+    <span class="label">Sua Campanha em Cotia</span>
+    <h2>O que você leva<br>com a PremiaPão em Cotia</h2>
+    <div class="cotia-grid">
+      <div class="cotia-stat">
+        <span class="cotia-n">30<span class="cotia-u">mil</span></span>
+        <span class="cotia-l">Saquinhos por campanha (90 dias)</span>
+      </div>
+      <div class="cotia-stat">
+        <span class="cotia-n">10<span class="cotia-u">mil</span></span>
+        <span class="cotia-l">Saquinhos distribuídos por mês</span>
+      </div>
+      <div class="cotia-stat">
+        <span class="cotia-n">4</span>
+        <span class="cotia-l">Padarias parceiras em Cotia</span>
+      </div>
+      <div class="cotia-stat">
+        <span class="cotia-n">120<span class="cotia-u">mil</span></span>
+        <span class="cotia-l">Impressões por campanha</span>
+      </div>
+    </div>
+    <p class="cotia-note">Média de 4 pessoas por domicílio (IBGE) &times; 30.000 saquinhos = 120.000 impressões por tiragem</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:32px;">
+      <div style="background:var(--bg);border-radius:14px;padding:20px 22px;border:1px solid var(--border);">
+        <p style="font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Michelli Pães — Granja Viana</p>
+        <p style="font-size:13px;">Alto fluxo de famílias residentes da Granja Viana</p>
+      </div>
+      <div style="background:var(--bg);border-radius:14px;padding:20px 22px;border:1px solid var(--border);">
+        <p style="font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Michelli Pães — Sabiá</p>
+        <p style="font-size:13px;">Cobertura do bairro Sabiá e arredores em Cotia</p>
+      </div>
+      <div style="background:var(--bg);border-radius:14px;padding:20px 22px;border:1px solid var(--border);">
+        <p style="font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">La Belle Ville — Granja Viana</p>
+        <p style="font-size:13px;">Padaria premium com público de alta renda</p>
+      </div>
+      <div style="background:var(--bg);border-radius:14px;padding:20px 22px;border:1px solid var(--border);">
+        <p style="font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Século 21 — KM 26</p>
+        <p style="font-size:13px;">Grande volume de clientes no eixo da Raposo Tavares</p>
       </div>
     </div>
   </div>
