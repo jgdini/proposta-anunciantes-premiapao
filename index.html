@@ -262,6 +262,26 @@
       font-size: 13px; color: var(--lite);
     }
 
+
+    /* FAB PRECO */
+    .fab-price {
+      position: fixed; bottom: 88px; right: 24px; z-index: 300;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 700;
+      padding: 0 16px 0 12px;
+      height: 46px; border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(244,123,32,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .fab-price:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 24px rgba(244,123,32,0.55);
+    }
+    .fab-price svg { width: 18px; height: 18px; fill: #fff; flex-shrink: 0; }
+
     /* FAB */
     .fab {
       position: fixed; bottom: 24px; right: 24px; z-index: 300;
@@ -651,6 +671,14 @@
   <img src="https://premiapao.com.br/wp-content/uploads/2024/02/Asset-5-170x45.png" alt="PremiaPão">
   PremiaPão Cotia &amp; Granja Viana &mdash; João Dini &mdash; 2026
 </footer>
+
+<!-- FLOATING PRICE BUTTON -->
+<a class="fab-price" href="https://jgdini.github.io/investimento-premiapao/" target="_blank" aria-label="Quanto custa?">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/>
+  </svg>
+  Quanto custa?
+</a>
 
 <!-- FLOATING BUTTON -->
 <a class="fab" href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Vi%20a%20proposta%20da%20PremiaPão%20e%20quero%20saber%20mais%20sobre%20anunciar%20em%20Cotia." target="_blank" aria-label="WhatsApp">
