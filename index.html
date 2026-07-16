@@ -48,12 +48,14 @@
     }
 
     /* NAV */
+    .sticky-header {
+      position: sticky; top: 0; z-index: 200;
+    }
     nav {
       background: rgba(245,245,247,0.88);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid rgba(0,0,0,0.08);
-      position: sticky; top: 0; z-index: 200;
       height: 52px;
       display: flex; align-items: center;
       padding: 0 24px;
@@ -404,6 +406,7 @@
 <body>
 
 <!-- NAV -->
+<div class="sticky-header">
 <nav>
   <img class="nav-logo" src="https://premiapao.com.br/wp-content/uploads/2024/02/Asset-5-170x45.png" alt="PremiaPão">
   <a class="nav-btn" href="https://wa.me/5511989531711?text=Ol%C3%A1%20Jo%C3%A3o!%20Vi%20a%20proposta%20da%20PremiaPão%20e%20quero%20saber%20mais%20sobre%20anunciar%20em%20Cotia." target="_blank">Falar com João</a>
@@ -419,6 +422,7 @@
   <span class="announce-sep">·</span>
   Mais de <strong>10 anos de mercado</strong>
 </div>
+</div><!-- /sticky-header -->
 
 <!-- ─── O QUE É ─── -->
 <div class="wrap">
