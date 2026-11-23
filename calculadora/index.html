@@ -270,12 +270,19 @@ body {
 .prop-obs b { color: var(--fg2); }
 
 .btn-print {
-  width: 100%; margin-top: 14px; padding: 9px 14px;
-  background: var(--accent); color: white; border: none; border-radius: 8px;
-  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600;
+  width: 100%; padding: 8px 14px;
+  background: var(--surface2); color: var(--fg2); border: 1px solid var(--border); border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600;
   cursor: pointer; transition: opacity .15s; display: flex; align-items: center; justify-content: center; gap: 6px;
 }
-.btn-print:hover { opacity: .88; }
+.btn-print:hover { background: var(--border); }
+.btn-gerar {
+  width: 100%; padding: 10px 14px;
+  background: var(--accent); color: white; border: none; border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: opacity .15s; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-gerar:hover { opacity: .88; }
 
 /* Impressão */
 @media print {
@@ -426,9 +433,44 @@ body {
 
     <div class="prop-obs" id="propObs"></div>
 
-    <button class="btn-print" onclick="window.print()">
+    <!-- Campos extras da proposta do cliente -->
+    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0">
+    <div class="card-title" style="margin-bottom:10px;font-size:11px">Dados para proposta do cliente</div>
+
+    <div class="field" style="margin-bottom:8px">
+      <label>Período da campanha</label>
+      <input type="text" id="prop-periodo" placeholder="Ex: Janeiro 2025, 30 dias…">
+    </div>
+    <div class="field" style="margin-bottom:8px">
+      <label>Proposta válida até</label>
+      <input type="date" id="prop-validade">
+    </div>
+    <div class="field" style="margin-bottom:8px">
+      <label>Observações (aparecem na proposta)</label>
+      <input type="text" id="prop-obs" placeholder="Arte inclusa, 15 dias de prazo…">
+    </div>
+    <div class="field" style="margin-bottom:12px">
+      <label>Contato / WhatsApp</label>
+      <input type="text" id="prop-contato" placeholder="(11) 99999-9999">
+    </div>
+
+    <button class="btn-gerar" id="btnGerar" type="button">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Gerar link da proposta
+    </button>
+
+    <div id="linkBox" style="display:none;margin-top:10px">
+      <div style="font-size:11px;color:var(--fg2);margin-bottom:5px;font-weight:600">Link gerado — copie e envie ao cliente:</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input type="text" id="linkOut" readonly style="flex:1;font-size:11px;padding:7px 9px;border-radius:7px;background:var(--surface2);border:1px solid var(--border);color:var(--fg);font-family:monospace;cursor:pointer" onclick="this.select()">
+        <button id="btnCopy" type="button" style="padding:7px 10px;border-radius:7px;background:var(--accent);color:white;border:none;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit">Copiar</button>
+      </div>
+      <div id="copyFeedback" style="font-size:11px;color:var(--green);margin-top:4px;display:none">✓ Copiado!</div>
+    </div>
+
+    <button class="btn-print" onclick="window.print()" style="margin-top:10px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Imprimir / Salvar PDF
+      Imprimir resumo interno
     </button>
   </div>
 
@@ -673,6 +715,60 @@ document.getElementById('preco').addEventListener('input', calc);
 document.getElementById('clicheria').addEventListener('input', calc);
 document.getElementById('impressao').addEventListener('input', calc);
 document.getElementById('anunciante').addEventListener('input', ()=>{});
+
+// ── Gerar link da proposta do cliente ──
+function gerarLinkProposta(){
+  const g = parseInt(document.getElementById('gramas').value);
+  const preco = parseFloat(document.getElementById('preco').value) || 0;
+  const anunciante = document.getElementById('anunciante').value.trim() || 'Anunciante';
+  const periodo  = document.getElementById('prop-periodo').value.trim();
+  const validade = document.getElementById('prop-validade').value
+    ? new Date(document.getElementById('prop-validade').value + 'T12:00:00')
+        .toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})
+    : '';
+  const obs     = document.getElementById('prop-obs').value.trim();
+  const contato = document.getElementById('prop-contato').value.trim();
+
+  // Padarias ativas — só o que o cliente vê (sem custo)
+  const padarias = PADARIAS
+    .filter(p => document.getElementById('chk-'+p.id).checked)
+    .map(p => ({
+      nome: p.nome,
+      local: p.local,
+      addr: p.addr,
+      qtd: parseInt(document.getElementById('pqty-'+p.id).value)
+    }));
+
+  if(padarias.length === 0){ alert('Selecione ao menos uma padaria.'); return; }
+  if(preco <= 0){ alert('Informe o valor cobrado do anunciante.'); return; }
+
+  const payload = {
+    anunciante, preco, gramas: g,
+    padarias,
+    periodo, validade, obs, contato,
+    extras: []  // nunca passa custos internos
+  };
+
+  const hash   = btoa(encodeURIComponent(JSON.stringify(payload)));
+  const base   = location.href.replace(/\/calculadora\/?.*$/, '');
+  const url    = base + '/proposta/#' + hash;
+
+  document.getElementById('linkOut').value = url;
+  document.getElementById('linkBox').style.display = '';
+  document.getElementById('copyFeedback').style.display = 'none';
+}
+
+document.getElementById('btnGerar').addEventListener('click', gerarLinkProposta);
+
+document.getElementById('btnCopy').addEventListener('click', ()=>{
+  const inp = document.getElementById('linkOut');
+  inp.select();
+  navigator.clipboard.writeText(inp.value).then(()=>{
+    const fb = document.getElementById('copyFeedback');
+    fb.style.display = 'block';
+    setTimeout(()=>{ fb.style.display = 'none'; }, 2500);
+  }).catch(()=>{ document.execCommand('copy'); });
+});
 
 buildPadList();
 setDate();

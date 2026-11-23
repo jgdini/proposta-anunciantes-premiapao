@@ -1,0 +1,431 @@
+<title>Proposta PremiaPão</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap">
+
+<style>
+:root {
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --border: #e8e5df;
+  --fg: #1a1916;
+  --fg2: #6b6760;
+  --fg3: #9b9890;
+  --accent: #CC2229;
+  --accent2: #a01820;
+  --gold: #b8860b;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1a0a0b 0%, #2d0f11 50%, #1a0a0b 100%);
+  padding: 56px max(24px,env(safe-area-inset-left,0px)) 48px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(204,34,41,.25) 0%, transparent 70%);
+}
+.hero-logo {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 32px; position: relative;
+}
+.hero-logo-mark {
+  width: 44px; height: 44px; background: var(--accent); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-logo-mark svg { width: 24px; height: 24px; }
+.hero-logo-text {
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700;
+  color: white; letter-spacing: -.01em;
+}
+.hero-badge {
+  display: inline-block; background: rgba(204,34,41,.2); border: 1px solid rgba(204,34,41,.4);
+  color: #ff9a9e; font-size: 11px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(26px, 5vw, 42px);
+  font-weight: 800; color: white; line-height: 1.15; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 em { color: #ff9a9e; font-style: normal; }
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,.65); margin-bottom: 32px; position: relative;
+}
+.hero-anunc {
+  display: inline-block; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 8px; padding: 10px 20px; color: white; font-size: 14px; position: relative;
+}
+.hero-anunc span { color: rgba(255,255,255,.5); font-size: 12px; display: block; margin-bottom: 2px; }
+.hero-anunc strong { font-size: 17px; font-weight: 700; }
+
+/* ── WRAPPER ── */
+.page { max-width: 760px; margin: 0 auto; padding: 0 max(20px,env(safe-area-inset-left,0px)) 60px; }
+
+/* ── SECTION ── */
+.section { margin-top: 48px; }
+.section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.section-title {
+  font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700;
+  color: var(--fg); margin-bottom: 6px; line-height: 1.25;
+}
+.section-desc { color: var(--fg2); font-size: 14px; }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px;
+}
+@media (max-width: 520px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px 16px; text-align: center;
+}
+.stat-num {
+  font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800;
+  color: var(--accent); line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums;
+}
+.stat-lbl { font-size: 12px; color: var(--fg2); font-weight: 500; line-height: 1.3; }
+
+/* ── PADARIAS ── */
+.pad-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.pad-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 18px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+}
+.pad-card-info { flex: 1; min-width: 0; }
+.pad-card-name { font-size: 15px; font-weight: 700; color: var(--fg); line-height: 1.2; margin-bottom: 3px; }
+.pad-card-local { font-size: 13px; color: var(--fg2); margin-bottom: 4px; }
+.pad-card-addr { font-size: 12px; color: var(--fg3); display: flex; align-items: center; gap: 4px; }
+.pad-card-addr svg { flex-shrink: 0; }
+.pad-card-qty { text-align: right; flex-shrink: 0; }
+.pad-card-qty-num {
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700;
+  color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1;
+}
+.pad-card-qty-lbl { font-size: 11px; color: var(--fg3); margin-top: 2px; }
+
+/* ── MOCKUP ── */
+.mockup-box {
+  margin-top: 20px; border: 2px dashed var(--border); border-radius: 14px;
+  overflow: hidden; position: relative; min-height: 200px;
+  background: var(--surface); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+}
+.mockup-box img { width: 100%; max-height: 400px; object-fit: contain; display: none; }
+.mockup-box.has-img img { display: block; }
+.mockup-box.has-img .mockup-placeholder { display: none; }
+.mockup-box.has-img { border-style: solid; border-color: var(--border); }
+.mockup-placeholder { text-align: center; padding: 32px 20px; pointer-events: none; }
+.mockup-placeholder svg { color: var(--fg3); margin-bottom: 10px; }
+.mockup-placeholder p { font-size: 13px; color: var(--fg3); }
+.mockup-placeholder strong { color: var(--fg2); font-size: 14px; display: block; margin-bottom: 4px; }
+#mockup-input { display: none; }
+.mockup-change-btn {
+  position: absolute; bottom: 10px; right: 10px;
+  background: rgba(0,0,0,.55); color: white; border: none; border-radius: 6px;
+  font-size: 11px; padding: 5px 10px; cursor: pointer; display: none;
+  font-family: 'Inter', sans-serif;
+}
+.mockup-box.has-img .mockup-change-btn { display: block; }
+
+/* ── PERÍODO ── */
+.periodo-box {
+  margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; gap: 14px;
+}
+.periodo-icon {
+  width: 40px; height: 40px; background: #fce8e9; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: var(--accent);
+}
+.periodo-info strong { font-size: 15px; font-weight: 700; display: block; color: var(--fg); }
+.periodo-info span { font-size: 13px; color: var(--fg2); }
+
+/* ── INVESTIMENTO ── */
+.invest-box {
+  margin-top: 20px; background: var(--accent); border-radius: 16px;
+  padding: 28px 24px; text-align: center; position: relative; overflow: hidden;
+}
+.invest-box::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.invest-label { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 8px; position: relative; }
+.invest-value {
+  font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px,6vw,52px); font-weight: 800;
+  color: white; font-variant-numeric: tabular-nums; line-height: 1; position: relative;
+}
+.invest-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 8px; position: relative; }
+
+/* ── EXTRAS NA PROPOSTA ── */
+.extras-list-prop { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.extra-prop-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; font-size: 14px;
+}
+.extra-prop-item .lbl { color: var(--fg2); }
+.extra-prop-item .val { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--fg); }
+
+/* ── OBS ── */
+.obs-box {
+  margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;
+  padding: 14px 18px; font-size: 14px; color: var(--fg2); line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 56px; padding: 32px max(20px,env(safe-area-inset-left,0px));
+  background: #1a0a0b; text-align: center;
+}
+.footer p { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.footer strong { color: rgba(255,255,255,.7); }
+
+/* ── VALIDADE BADGE ── */
+.validade-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--gold); color: white; font-size: 12px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px; margin-top: 12px;
+}
+
+/* Print */
+@media print {
+  .mockup-change-btn, .mockup-placeholder { display: none !important; }
+  .mockup-box { border: 1px solid #ddd; min-height: auto; }
+}
+</style>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">
+    <div class="hero-logo-mark">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C8 2 4 4 4 9c0 4 2.5 7 6 7s6-3 6-7c0-5-4-7-6-7z" fill="white" opacity=".9"/><path d="M7 10c1 1.5 5 1.5 6 0" stroke="#CC2229" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </div>
+    <span class="hero-logo-text">PremiaPão</span>
+  </div>
+  <div class="hero-badge">Proposta Comercial</div>
+  <h1>Sua marca em <em>todo canto</em><br>de Cotia &amp; Granja Viana</h1>
+  <p class="hero-sub">Publicidade no saquinho de pão — onde toda família chega</p>
+  <div class="hero-anunc">
+    <span>Preparada para</span>
+    <strong id="heroAnunc">—</strong>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ALCANCE -->
+  <div class="section">
+    <div class="section-label">Alcance da campanha</div>
+    <div class="section-title" id="secTitleAlcance">Uma campanha de impacto real</div>
+    <p class="section-desc">Sua arte impressa nos saquinhos das padarias mais movimentadas da região — chegando à mesa de milhares de famílias todo mês.</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="statSaquinhos">—</div>
+        <div class="stat-lbl">saquinhos<br>distribuídos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statPadarias">—</div>
+        <div class="stat-lbl">padarias<br>parceiras</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statFamilias">—</div>
+        <div class="stat-lbl">famílias<br>impactadas / mês</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PADARIAS -->
+  <div class="section">
+    <div class="section-label">Pontos de distribuição</div>
+    <div class="section-title">Padarias participantes</div>
+    <div class="pad-grid" id="padGrid"></div>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="section">
+    <div class="section-label">Arte da campanha</div>
+    <div class="section-title">Seu anúncio no saquinho</div>
+    <p class="section-desc">Arte personalizada, aprovada antes da impressão.</p>
+    <div class="mockup-box" id="mockupBox" onclick="document.getElementById('mockup-input').click()">
+      <div class="mockup-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <strong>Clique para adicionar o mockup</strong>
+        <p>Sobe a imagem da arte criada para esta proposta</p>
+      </div>
+      <img id="mockupImg" src="" alt="Mockup da arte">
+      <button class="mockup-change-btn" onclick="event.stopPropagation();document.getElementById('mockup-input').click()">Trocar imagem</button>
+    </div>
+    <input type="file" id="mockup-input" accept="image/*">
+  </div>
+
+  <!-- PERÍODO -->
+  <div class="section" id="secPeriodo" style="display:none">
+    <div class="section-label">Vigência</div>
+    <div class="section-title">Período da campanha</div>
+    <div class="periodo-box">
+      <div class="periodo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="periodo-info">
+        <strong id="periodoTexto">—</strong>
+        <span id="periodoValidade"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVESTIMENTO -->
+  <div class="section">
+    <div class="section-label">Investimento</div>
+    <div class="section-title">Valor da campanha</div>
+    <div class="invest-box">
+      <div class="invest-label">Investimento total</div>
+      <div class="invest-value" id="investValue">—</div>
+      <div class="invest-sub" id="investSub"></div>
+    </div>
+    <div class="extras-list-prop" id="extrasListProp"></div>
+  </div>
+
+  <!-- OBS -->
+  <div class="section" id="secObs" style="display:none">
+    <div class="section-label">Observações</div>
+    <div class="obs-box" id="obsBox"></div>
+  </div>
+
+  <!-- FOOTER -->
+</div>
+<div class="footer">
+  <p>
+    <strong>PremiaPão — Cotia &amp; Granja Viana</strong><br>
+    Publicidade em saquinhos de pão · Membro ABF<br>
+    <span id="footerContact"></span>
+  </p>
+</div>
+
+<script>
+function fmtPt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function brl(n){return 'R$ '+fmtPt(n);}
+const PIN = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+
+function decodeData(){
+  try {
+    const h = location.hash.slice(1);
+    if(!h) return null;
+    const json = decodeURIComponent(atob(h));
+    return JSON.parse(json);
+  } catch(e){ return null; }
+}
+
+function render(d){
+  // Anunciante
+  const anunc = d.anunciante || 'Anunciante';
+  document.getElementById('heroAnunc').textContent = anunc;
+  document.title = 'Proposta PremiaPão — ' + anunc;
+
+  // Stats
+  const totalQtd = d.padarias.reduce((s,p)=>s+p.qtd,0);
+  document.getElementById('statSaquinhos').textContent = fmtPt(totalQtd);
+  document.getElementById('statPadarias').textContent  = d.padarias.length;
+  document.getElementById('statFamilias').textContent  = fmtPt(Math.round(totalQtd * 2.8 / 1000)) + 'k';
+
+  // Título alcance
+  document.getElementById('secTitleAlcance').textContent =
+    fmtPt(totalQtd) + ' saquinhos, ' + d.padarias.length + ' padaria' + (d.padarias.length>1?'s':'');
+
+  // Padarias
+  const grid = document.getElementById('padGrid');
+  grid.innerHTML = '';
+  d.padarias.forEach(p=>{
+    const div = document.createElement('div');
+    div.className = 'pad-card';
+    div.innerHTML = `
+      <div class="pad-card-info">
+        <div class="pad-card-name">${p.nome}</div>
+        <div class="pad-card-local">${p.local}</div>
+        <div class="pad-card-addr">${PIN}${p.addr}</div>
+      </div>
+      <div class="pad-card-qty">
+        <div class="pad-card-qty-num">${fmtPt(p.qtd)}</div>
+        <div class="pad-card-qty-lbl">saquinhos</div>
+      </div>`;
+    grid.appendChild(div);
+  });
+
+  // Período
+  if(d.periodo){
+    document.getElementById('secPeriodo').style.display = '';
+    document.getElementById('periodoTexto').textContent = d.periodo;
+    if(d.validade){
+      document.getElementById('periodoValidade').textContent = 'Proposta válida até ' + d.validade;
+    }
+  }
+
+  // Investimento
+  document.getElementById('investValue').textContent = brl(d.preco);
+  document.getElementById('investSub').textContent =
+    fmtPt(totalQtd) + ' saquinhos · ' + d.padarias.length + ' padaria' + (d.padarias.length>1?'s':'') +
+    (d.gramas ? ' · ' + d.gramas + 'kg' : '');
+
+  // Extras na proposta (só os que o usuário marcou como "mostrar")
+  const extrasWrap = document.getElementById('extrasListProp');
+  extrasWrap.innerHTML = '';
+  if(d.extras && d.extras.length){
+    d.extras.forEach(ex=>{
+      const div = document.createElement('div');
+      div.className = 'extra-prop-item';
+      div.innerHTML = `<span class="lbl">${ex.nome}</span><span class="val">${brl(ex.valor)}</span>`;
+      extrasWrap.appendChild(div);
+    });
+  }
+
+  // Obs
+  if(d.obs){
+    document.getElementById('secObs').style.display = '';
+    document.getElementById('obsBox').textContent = d.obs;
+  }
+
+  // Rodapé
+  if(d.contato) document.getElementById('footerContact').textContent = d.contato;
+}
+
+// Mockup upload
+document.getElementById('mockup-input').addEventListener('change', function(){
+  const file = this.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('mockupImg').src = e.target.result;
+    document.getElementById('mockupBox').classList.add('has-img');
+  };
+  reader.readAsDataURL(file);
+});
+
+const data = decodeData();
+if(data) render(data);
+else {
+  // modo preview (sem dados)
+  document.getElementById('heroAnunc').textContent = 'Empresa Exemplo';
+  document.getElementById('statSaquinhos').textContent = '30.000';
+  document.getElementById('statPadarias').textContent = '4';
+  document.getElementById('statFamilias').textContent = '84k';
+  document.getElementById('secTitleAlcance').textContent = '30.000 saquinhos, 4 padarias';
+  document.getElementById('investValue').textContent = 'R$ 4.500';
+  document.getElementById('investSub').textContent = '30.000 saquinhos · 4 padarias · 5kg';
+  const grid = document.getElementById('padGrid');
+  grid.innerHTML = '<div style="font-size:13px;color:var(--fg3);padding:10px 0">Gere a proposta pela calculadora para ver as padarias aqui.</div>';
+}
+</script>
