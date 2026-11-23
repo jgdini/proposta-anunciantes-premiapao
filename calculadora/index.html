@@ -1,0 +1,625 @@
+<title>Simulador PremiaPão</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+
+<style>
+/* Layout: painel de controles à esq + resultado à dir; empilha no mobile */
+:root {
+  --bg: #f8f7f5;
+  --surface: #ffffff;
+  --surface2: #f2f1ee;
+  --border: #e4e2dc;
+  --fg: #1a1916;
+  --fg2: #6b6760;
+  --fg3: #9b9890;
+  --accent: #CC2229;
+  --accent-light: #fce8e9;
+  --gold: #c89b00;
+  --gold-light: #fdf6dc;
+  --green: #1a7a3c;
+  --green-light: #e6f4ec;
+  --red: #c0392b;
+  --red-light: #fcecea;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #181714;
+    --surface: #242320;
+    --surface2: #2e2d29;
+    --border: #3a3935;
+    --fg: #f0ede8;
+    --fg2: #a09d97;
+    --fg3: #6b6860;
+    --accent: #e63a41;
+    --accent-light: #3a1214;
+    --gold: #d4a800;
+    --gold-light: #2e2510;
+    --green: #2ea057;
+    --green-light: #0f2a1c;
+    --red: #e05a4e;
+    --red-light: #2e1210;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #181714;
+  --surface: #242320;
+  --surface2: #2e2d29;
+  --border: #3a3935;
+  --fg: #f0ede8;
+  --fg2: #a09d97;
+  --fg3: #6b6860;
+  --accent: #e63a41;
+  --accent-light: #3a1214;
+  --gold: #d4a800;
+  --gold-light: #2e2510;
+  --green: #2ea057;
+  --green-light: #0f2a1c;
+  --red: #e05a4e;
+  --red-light: #2e1210;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  padding-block: 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  min-height: 100%;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.logo-mark {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark svg { width: 20px; height: 20px; }
+.header-text h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.1;
+}
+.header-text p { color: var(--fg2); font-size: 12px; }
+
+/* ── Layout ── */
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  align-items: start;
+  max-width: 900px;
+}
+@media (max-width: 680px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--fg2);
+  margin-bottom: 16px;
+}
+
+/* ── Inputs ── */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg2);
+  margin-bottom: 5px;
+}
+.field select, .field input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--fg);
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: border-color .15s;
+  font-variant-numeric: tabular-nums;
+}
+.field select:focus, .field input:focus {
+  border-color: var(--accent);
+}
+.select-wrap { position: relative; }
+.select-wrap::after {
+  content: '';
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--fg3);
+  pointer-events: none;
+}
+.field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+/* custo unitário display */
+.unit-cost {
+  font-size: 11px;
+  color: var(--fg3);
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+
+/* Valor cobrado helper */
+.price-suggestion {
+  font-size: 11px;
+  color: var(--gold);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ── Resultado ── */
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 400px) {
+  .result-grid { grid-template-columns: 1fr; }
+}
+
+.metric {
+  background: var(--surface2);
+  border-radius: 10px;
+  padding: 14px;
+}
+.metric.full { grid-column: 1 / -1; }
+.metric.highlight-green {
+  background: var(--green-light);
+  border: 1px solid var(--green);
+}
+.metric.highlight-red {
+  background: var(--red-light);
+  border: 1px solid var(--red);
+}
+.metric.highlight-gold {
+  background: var(--gold-light);
+  border: 1px solid var(--gold);
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--fg2);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.metric.highlight-green .metric-value { color: var(--green); }
+.metric.highlight-red .metric-value { color: var(--red); }
+.metric.highlight-gold .metric-value { color: var(--gold); }
+.metric-sub {
+  font-size: 11px;
+  color: var(--fg3);
+  margin-top: 2px;
+}
+
+/* margin bar */
+.margin-bar-wrap { margin-bottom: 4px; }
+.margin-bar-track {
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.margin-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .4s, background .4s;
+}
+
+/* breakdown table */
+.breakdown {
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding-top: 14px;
+}
+.breakdown-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--fg2);
+  margin-bottom: 10px;
+}
+.brow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.brow:last-child { border-bottom: none; }
+.brow .lbl { color: var(--fg2); }
+.brow .val { font-weight: 600; }
+.brow.total { font-weight: 700; color: var(--fg); font-size: 14px; }
+.brow.total .lbl { color: var(--fg); }
+
+/* multiple bags section */
+.bags-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.bag-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg2);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.bag-toggle input { accent-color: var(--accent); cursor: pointer; }
+.bag-toggle.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+/* note */
+.note {
+  font-size: 11px;
+  color: var(--fg3);
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: var(--surface2);
+  border-radius: 6px;
+  line-height: 1.4;
+}
+</style>
+
+<div class="header">
+  <div class="logo-mark">
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 2C8 2 4 4 4 9c0 4 2.5 7 6 7s6-3 6-7c0-5-4-7-6-7z" fill="white" opacity=".9"/>
+      <path d="M7 10c1 1.5 5 1.5 6 0" stroke="#CC2229" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <h1>Simulador de Campanha</h1>
+    <p>PremiaPão Cotia &amp; Granja Viana</p>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- CONTROLES -->
+  <div class="card">
+    <div class="card-title">Parâmetros da Campanha</div>
+
+    <div class="field">
+      <label>Gramatura do saquinho</label>
+      <div class="select-wrap">
+        <select id="gramas">
+          <option value="4">4 kg</option>
+          <option value="5" selected>5 kg</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Quantidade de saquinhos</label>
+      <div class="select-wrap">
+        <select id="qtde"></select>
+      </div>
+      <div class="unit-cost" id="unitCost"></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Valor cobrado do anunciante (R$)</label>
+      <input type="number" id="preco" min="0" step="100" placeholder="ex: 4500">
+      <div class="price-suggestion" id="priceSugg"></div>
+    </div>
+
+    <div class="field">
+      <label>Outras despesas (R$)</label>
+      <input type="number" id="despesas" min="0" step="50" value="0" placeholder="arte, frete…">
+    </div>
+
+    <hr class="divider">
+
+    <div class="card-title" style="margin-bottom:10px">Composição do custo</div>
+    <div class="field">
+      <label>Clicheria (R$)</label>
+      <input type="number" id="clicheria" min="0" step="10">
+    </div>
+    <div class="field">
+      <label>Impressão (R$)</label>
+      <input type="number" id="impressao" min="0" step="10">
+    </div>
+
+    <div class="note">Valores baseados na tabela PremiaPão. Ajuste se necessário.</div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="card">
+    <div class="card-title">Resultado da Simulação</div>
+
+    <div class="result-grid">
+      <div class="metric full" id="cardLucro">
+        <div class="metric-label">Lucro líquido</div>
+        <div class="metric-value" id="valLucro">—</div>
+        <div class="metric-sub" id="subLucro"></div>
+        <div class="margin-bar-wrap">
+          <div class="margin-bar-track">
+            <div class="margin-bar-fill" id="barFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Receita</div>
+        <div class="metric-value" id="valReceita">—</div>
+        <div class="metric-sub">cobrado do anunciante</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Custo total</div>
+        <div class="metric-value" id="valCusto">—</div>
+        <div class="metric-sub">saquinhos + despesas</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Custo/saquinho</div>
+        <div class="metric-value" id="valUnitCusto">—</div>
+        <div class="metric-sub">sem despesas extras</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Receita/saquinho</div>
+        <div class="metric-value" id="valUnitRec">—</div>
+        <div class="metric-sub">preço ÷ quantidade</div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-title">Detalhamento de custos</div>
+      <div class="brow"><span class="lbl">Clicheria</span><span class="val" id="bClicheria">—</span></div>
+      <div class="brow"><span class="lbl">Impressão</span><span class="val" id="bImpressao">—</span></div>
+      <div class="brow"><span class="lbl">Outras despesas</span><span class="val" id="bDespesas">—</span></div>
+      <div class="brow total"><span class="lbl">Total de custos</span><span class="val" id="bTotal">—</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Tabelas de preço PremiaPão ──
+const TABLE = {
+  // qtde em unidades (ex: 10000)
+  // [clicheria, impressao]
+  5: {
+    10000:  [1365, 3650],
+    15000:  [1365, 4575],
+    20000:  [1365, 5400],
+    25000:  [1365, 6625],
+    30000:  [1365, 7500],
+    40000:  [1365, 10000],
+    50000:  [1365, 12500],
+    60000:  [1365, 15000],
+    70000:  [1365, 17500],
+    80000:  [1365, 20000],
+    90000:  [1365, 22500],
+    100000: [1365, 24500],
+    200000: [1365, 49000],
+    300000: [1365, 73500],
+  },
+  4: {
+    10000:  [1155, 3500],
+    15000:  [1155, 4350],
+    20000:  [1155, 5200],
+    25000:  [1155, 6000],
+    30000:  [1155, 6900],
+    40000:  [1155, 9200],
+    50000:  [1155, 11500],
+    60000:  [1155, 13800],
+    70000:  [1155, 16100],
+    80000:  [1155, 18400],
+    90000:  [1155, 20700],
+    100000: [1155, 22500],
+    200000: [1155, 45000],
+    300000: [1155, 67500],
+  }
+};
+
+// Tabela 1k-9k (totais tabelados, sem separar clicheria/impressão)
+// Usamos a proporção: total = clicheria + impressao
+// Para 1k-9k: a clicheria é ~fixa (1365/1155), impressão = total - clicheria
+const TABLE_SMALL = {
+  5: { 1000:2600, 2000:2700, 3000:2810, 4000:2930, 5000:3050, 6000:3170, 7000:3290, 8000:3410, 9000:3530 },
+  4: { 1000:2570, 2000:2690, 3000:2800, 4000:2900, 5000:3000, 6000:3100, 7000:3200, 8000:3300, 9000:3400 }
+};
+
+const LABELS = {
+  1000:'1 mil', 2000:'2 mil', 3000:'3 mil', 4000:'4 mil', 5000:'5 mil',
+  6000:'6 mil', 7000:'7 mil', 8000:'8 mil', 9000:'9 mil',
+  10000:'10 mil', 15000:'15 mil', 20000:'20 mil', 25000:'25 mil',
+  30000:'30 mil', 40000:'40 mil', 50000:'50 mil', 60000:'60 mil',
+  70000:'70 mil', 80000:'80 mil', 90000:'90 mil', 100000:'100 mil',
+  200000:'200 mil', 300000:'300 mil'
+};
+
+function brl(n) {
+  return 'R$ ' + n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+function brl0(n) {
+  return 'R$ ' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+const selGramas   = document.getElementById('gramas');
+const selQtde     = document.getElementById('qtde');
+const inpPreco    = document.getElementById('preco');
+const inpDespesas = document.getElementById('despesas');
+const inpClich    = document.getElementById('clicheria');
+const inpImpr     = document.getElementById('impressao');
+
+function populateQtde() {
+  const g = parseInt(selGramas.value);
+  const cur = parseInt(selQtde.value) || 0;
+  selQtde.innerHTML = '';
+  const all = [
+    ...Object.keys(TABLE_SMALL[g]),
+    ...Object.keys(TABLE[g])
+  ].map(Number).sort((a,b)=>a-b);
+  all.forEach(q => {
+    const opt = document.createElement('option');
+    opt.value = q;
+    opt.textContent = LABELS[q];
+    if (q === cur) opt.selected = true;
+    selQtde.appendChild(opt);
+  });
+  if (!cur) selQtde.value = 30000; // padrão
+}
+
+function getCosts(g, q) {
+  if (TABLE[g][q]) {
+    return { clicheria: TABLE[g][q][0], impressao: TABLE[g][q][1] };
+  }
+  if (TABLE_SMALL[g][q]) {
+    const total = TABLE_SMALL[g][q];
+    const clich = g === 5 ? 1365 : 1155;
+    return { clicheria: clich, impressao: total - clich };
+  }
+  return null;
+}
+
+function calc() {
+  const g = parseInt(selGramas.value);
+  const q = parseInt(selQtde.value);
+  const costs = getCosts(g, q);
+  if (!costs) return;
+
+  // Preenche campos se estiverem vazios ou mudaram gramatura/qtde
+  inpClich.value = costs.clicheria;
+  inpImpr.value  = costs.impressao;
+
+  const clich    = parseFloat(inpClich.value)    || costs.clicheria;
+  const impr     = parseFloat(inpImpr.value)     || costs.impressao;
+  const desp     = parseFloat(inpDespesas.value) || 0;
+  const preco    = parseFloat(inpPreco.value)    || 0;
+
+  const totalSac = clich + impr;
+  const totalCusto = totalSac + desp;
+  const lucro = preco - totalCusto;
+  const margin = preco > 0 ? (lucro / preco) * 100 : 0;
+  const unitCusto = totalSac / q;
+  const unitRec   = preco > 0 ? preco / q : 0;
+
+  // unit cost hint
+  document.getElementById('unitCost').textContent =
+    'Custo por saquinho: R$ ' + unitCusto.toFixed(4).replace('.', ',') + ' · Total tabela: ' + brl0(totalSac);
+
+  // suggestion: markup 40%
+  const sug = Math.ceil(totalSac * 1.4 / 100) * 100;
+  document.getElementById('priceSugg').textContent =
+    'Sugestão c/ margem 40%: ' + brl0(sug);
+
+  // resultado
+  document.getElementById('valReceita').textContent  = preco > 0 ? brl0(preco) : '—';
+  document.getElementById('valCusto').textContent    = brl0(totalCusto);
+  document.getElementById('valUnitCusto').textContent = 'R$ ' + unitCusto.toFixed(4).replace('.', ',');
+  document.getElementById('valUnitRec').textContent  = preco > 0
+    ? 'R$ ' + unitRec.toFixed(4).replace('.', ',') : '—';
+
+  const cardLucro = document.getElementById('cardLucro');
+  const valLucro  = document.getElementById('valLucro');
+  const subLucro  = document.getElementById('subLucro');
+  const barFill   = document.getElementById('barFill');
+
+  if (preco > 0) {
+    valLucro.textContent = brl0(lucro);
+    subLucro.textContent = 'Margem: ' + margin.toFixed(1).replace('.', ',') + '%';
+    const pct = Math.max(0, Math.min(100, margin));
+    barFill.style.width   = pct + '%';
+    if (lucro >= 0) {
+      barFill.style.background = 'var(--green)';
+      cardLucro.className = 'metric full highlight-green';
+    } else {
+      barFill.style.background = 'var(--red)';
+      cardLucro.className = 'metric full highlight-red';
+    }
+  } else {
+    valLucro.textContent = '—';
+    subLucro.textContent = 'Informe o valor cobrado';
+    barFill.style.width = '0%';
+    cardLucro.className = 'metric full';
+  }
+
+  // breakdown
+  document.getElementById('bClicheria').textContent = brl0(clich);
+  document.getElementById('bImpressao').textContent = brl0(impr);
+  document.getElementById('bDespesas').textContent  = desp > 0 ? brl0(desp) : '—';
+  document.getElementById('bTotal').textContent     = brl0(totalCusto);
+}
+
+function onQtdeChange() {
+  const g = parseInt(selGramas.value);
+  const q = parseInt(selQtde.value);
+  const costs = getCosts(g, q);
+  if (costs) {
+    inpClich.value = costs.clicheria;
+    inpImpr.value  = costs.impressao;
+  }
+  calc();
+}
+
+selGramas.addEventListener('change', () => { populateQtde(); onQtdeChange(); });
+selQtde.addEventListener('change', onQtdeChange);
+inpPreco.addEventListener('input', calc);
+inpDespesas.addEventListener('input', calc);
+inpClich.addEventListener('input', calc);
+inpImpr.addEventListener('input', calc);
+
+populateQtde();
+onQtdeChange();
+</script>
