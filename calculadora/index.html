@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
 
 <style>
-/* Layout: painel de controles à esq + resultado à dir; empilha no mobile */
 :root {
   --bg: #f8f7f5;
   --surface: #ffffff;
@@ -24,348 +23,274 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #181714;
-    --surface: #242320;
-    --surface2: #2e2d29;
-    --border: #3a3935;
-    --fg: #f0ede8;
-    --fg2: #a09d97;
-    --fg3: #6b6860;
-    --accent: #e63a41;
-    --accent-light: #3a1214;
-    --gold: #d4a800;
-    --gold-light: #2e2510;
-    --green: #2ea057;
-    --green-light: #0f2a1c;
-    --red: #e05a4e;
-    --red-light: #2e1210;
+    --bg: #181714; --surface: #242320; --surface2: #2e2d29; --border: #3a3935;
+    --fg: #f0ede8; --fg2: #a09d97; --fg3: #6b6860;
+    --accent: #e63a41; --accent-light: #3a1214;
+    --gold: #d4a800; --gold-light: #2e2510;
+    --green: #2ea057; --green-light: #0f2a1c;
+    --red: #e05a4e; --red-light: #2e1210;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #181714;
-  --surface: #242320;
-  --surface2: #2e2d29;
-  --border: #3a3935;
-  --fg: #f0ede8;
-  --fg2: #a09d97;
-  --fg3: #6b6860;
-  --accent: #e63a41;
-  --accent-light: #3a1214;
-  --gold: #d4a800;
-  --gold-light: #2e2510;
-  --green: #2ea057;
-  --green-light: #0f2a1c;
-  --red: #e05a4e;
-  --red-light: #2e1210;
+  --bg: #181714; --surface: #242320; --surface2: #2e2d29; --border: #3a3935;
+  --fg: #f0ede8; --fg2: #a09d97; --fg3: #6b6860;
+  --accent: #e63a41; --accent-light: #3a1214;
+  --gold: #d4a800; --gold-light: #2e2510;
+  --green: #2ea057; --green-light: #0f2a1c;
+  --red: #e05a4e; --red-light: #2e1210;
   color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; }
-
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  padding-block: 24px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--bg); color: var(--fg);
+  font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5;
+  padding: 20px max(16px, env(safe-area-inset-right,0px)) 40px max(16px, env(safe-area-inset-left,0px));
   min-height: 100%;
 }
 
 /* ── Header ── */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
 .logo-mark {
-  width: 36px; height: 36px;
-  background: var(--accent);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 36px; height: 36px; background: var(--accent); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .logo-mark svg { width: 20px; height: 20px; }
-.header-text h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--fg);
-  line-height: 1.1;
-}
+.header-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.1; }
 .header-text p { color: var(--fg2); font-size: 12px; }
 
-/* ── Layout ── */
+/* ── Layout 3 colunas ── */
 .layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 16px;
+  grid-template-columns: 300px 280px 1fr;
+  gap: 14px;
   align-items: start;
-  max-width: 900px;
+  max-width: 1100px;
 }
-@media (max-width: 680px) {
-  .layout { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .layout { grid-template-columns: 1fr; } }
 
-/* ── Card ── */
+/* ── Card genérico ── */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px;
 }
 .card-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--fg2);
-  margin-bottom: 16px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--fg2); margin-bottom: 14px;
 }
 
 /* ── Inputs ── */
-.field { margin-bottom: 14px; }
-.field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--fg2);
-  margin-bottom: 5px;
-}
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 12px; font-weight: 500; color: var(--fg2); margin-bottom: 4px; }
 .field select, .field input {
-  width: 100%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  color: var(--fg);
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  transition: border-color .15s;
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 10px; font-size: 14px; font-family: 'Inter', sans-serif;
+  color: var(--fg); appearance: none; -webkit-appearance: none; outline: none; transition: border-color .15s;
   font-variant-numeric: tabular-nums;
 }
-.field select:focus, .field input:focus {
-  border-color: var(--accent);
-}
+.field select:focus, .field input:focus { border-color: var(--accent); }
 .select-wrap { position: relative; }
 .select-wrap::after {
-  content: '';
-  position: absolute; right: 10px; top: 50%;
-  transform: translateY(-50%);
-  border: 4px solid transparent;
-  border-top-color: var(--fg3);
-  pointer-events: none;
+  content: ''; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  border: 4px solid transparent; border-top-color: var(--fg3); pointer-events: none;
 }
 .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-
-/* custo unitário display */
-.unit-cost {
-  font-size: 11px;
-  color: var(--fg3);
-  margin-top: 4px;
-  font-variant-numeric: tabular-nums;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 16px 0;
-}
-
-/* Valor cobrado helper */
-.price-suggestion {
-  font-size: 11px;
-  color: var(--gold);
-  margin-top: 4px;
-  font-weight: 500;
-}
-
-/* ── Resultado ── */
-.result-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-@media (max-width: 400px) {
-  .result-grid { grid-template-columns: 1fr; }
-}
-
-.metric {
-  background: var(--surface2);
-  border-radius: 10px;
-  padding: 14px;
-}
-.metric.full { grid-column: 1 / -1; }
-.metric.highlight-green {
-  background: var(--green-light);
-  border: 1px solid var(--green);
-}
-.metric.highlight-red {
-  background: var(--red-light);
-  border: 1px solid var(--red);
-}
-.metric.highlight-gold {
-  background: var(--gold-light);
-  border: 1px solid var(--gold);
-}
-.metric-label {
-  font-size: 11px;
-  color: var(--fg2);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  margin-bottom: 4px;
-}
-.metric-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--fg);
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-}
-.metric.highlight-green .metric-value { color: var(--green); }
-.metric.highlight-red .metric-value { color: var(--red); }
-.metric.highlight-gold .metric-value { color: var(--gold); }
-.metric-sub {
-  font-size: 11px;
-  color: var(--fg3);
-  margin-top: 2px;
-}
-
-/* margin bar */
-.margin-bar-wrap { margin-bottom: 4px; }
-.margin-bar-track {
-  height: 8px;
-  background: var(--surface2);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-.margin-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width .4s, background .4s;
-}
-
-/* breakdown table */
-.breakdown {
-  border-top: 1px solid var(--border);
-  margin-top: 14px;
-  padding-top: 14px;
-}
-.breakdown-title {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--fg2);
-  margin-bottom: 10px;
-}
-.brow {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--border);
-  color: var(--fg);
-  font-variant-numeric: tabular-nums;
-}
-.brow:last-child { border-bottom: none; }
-.brow .lbl { color: var(--fg2); }
-.brow .val { font-weight: 600; }
-.brow.total { font-weight: 700; color: var(--fg); font-size: 14px; }
-.brow.total .lbl { color: var(--fg); }
+.unit-cost { font-size: 11px; color: var(--fg3); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.price-suggestion { font-size: 11px; color: var(--gold); margin-top: 4px; font-weight: 500; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+.note { font-size: 11px; color: var(--fg3); margin-top: 10px; padding: 8px 10px; background: var(--surface2); border-radius: 6px; line-height: 1.4; }
 
 /* ── Padarias ── */
 .pad-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
 .pad-row {
-  display: grid;
-  grid-template-columns: 20px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
-  transition: opacity .2s, border-color .2s;
-  cursor: pointer;
+  display: grid; grid-template-columns: 20px 1fr auto;
+  align-items: center; gap: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 10px;
+  transition: opacity .2s, border-color .2s; cursor: pointer;
 }
 .pad-row:hover { border-color: var(--accent); }
 .pad-row.disabled { opacity: 0.45; }
 .pad-row.disabled:hover { border-color: var(--border); }
-/* checkbox SEMPRE clicável, mesmo com row disabled */
 .pad-row input[type=checkbox] {
-  accent-color: var(--accent);
-  width: 16px; height: 16px;
-  flex-shrink: 0;
-  cursor: pointer;
-  pointer-events: auto;
-  position: relative;
-  z-index: 1;
+  accent-color: var(--accent); width: 16px; height: 16px;
+  flex-shrink: 0; cursor: pointer; pointer-events: auto; position: relative; z-index: 1;
 }
-.pad-row-name { font-size: 13px; font-weight: 500; color: var(--fg); min-width: 0; line-height: 1.3; }
-.pad-row-name span { display: block; font-size: 11px; color: var(--fg3); font-weight: 400; margin-top: 1px; }
+.pad-row-name { font-size: 13px; font-weight: 500; color: var(--fg); min-width: 0; line-height: 1.2; }
+.pad-row-name span { display: block; font-size: 11px; color: var(--fg3); font-weight: 400; }
 .pad-row select {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 8px;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  outline: none;
-  font-family: inherit;
-  min-width: 80px;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  padding: 4px 7px; appearance: none; -webkit-appearance: none; cursor: pointer;
+  outline: none; font-family: inherit; min-width: 76px; font-variant-numeric: tabular-nums; text-align: center;
 }
-.pad-row select:focus { border-color: var(--accent); }
 .pad-row.disabled select { pointer-events: none; opacity: 0.6; }
 .pad-total-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: var(--fg2);
-  font-weight: 500;
-  padding: 4px 2px 0;
-  border-top: 1px dashed var(--border);
-  margin-top: 2px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--fg2); font-weight: 500;
+  padding: 4px 2px 0; border-top: 1px dashed var(--border); margin-top: 2px;
   font-variant-numeric: tabular-nums;
 }
 .pad-total-line strong { color: var(--accent); font-size: 13px; }
 
-/* note */
-.note {
-  font-size: 11px;
-  color: var(--fg3);
-  margin-top: 10px;
-  padding: 8px 10px;
-  background: var(--surface2);
-  border-radius: 6px;
-  line-height: 1.4;
+/* ── Custos extras ── */
+.extras-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.extra-item {
+  display: grid; grid-template-columns: 1fr auto auto;
+  gap: 6px; align-items: center;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 8px;
+}
+.extra-item input[type=text] {
+  font-size: 12px; padding: 4px 6px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--fg);
+  font-family: 'Inter', sans-serif; outline: none;
+}
+.extra-item input[type=text]:focus { border-color: var(--accent); }
+.extra-item input[type=number] {
+  width: 90px; font-size: 12px; padding: 4px 6px; border-radius: 6px; text-align: right;
+  background: var(--surface); border: 1px solid var(--border); color: var(--fg);
+  font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums; outline: none;
+}
+.extra-item input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+.extra-item input[type=number]:focus { border-color: var(--accent); }
+.btn-del {
+  width: 24px; height: 24px; border-radius: 6px; border: none;
+  background: var(--red-light); color: var(--red); cursor: pointer;
+  font-size: 15px; line-height: 1; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background .15s;
+}
+.btn-del:hover { background: var(--red); color: white; }
+.btn-add {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  background: var(--accent-light); border: 1px dashed var(--accent);
+  border-radius: 7px; padding: 5px 10px; cursor: pointer;
+  transition: background .15s; width: 100%;
+  font-family: 'Inter', sans-serif; outline: none;
+}
+.btn-add:hover { background: var(--accent); color: white; }
+
+/* ── Resultado financeiro ── */
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+@media (max-width: 400px) { .result-grid { grid-template-columns: 1fr; } }
+.metric { background: var(--surface2); border-radius: 10px; padding: 12px; }
+.metric.full { grid-column: 1 / -1; }
+.metric.highlight-green { background: var(--green-light); border: 1px solid var(--green); }
+.metric.highlight-red   { background: var(--red-light);   border: 1px solid var(--red); }
+.metric-label { font-size: 11px; color: var(--fg2); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+.metric-value { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--fg); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.metric.highlight-green .metric-value { color: var(--green); }
+.metric.highlight-red   .metric-value { color: var(--red); }
+.metric-sub { font-size: 11px; color: var(--fg3); margin-top: 2px; }
+.margin-bar-track { height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 7px; }
+.margin-bar-fill { height: 100%; border-radius: 4px; transition: width .4s, background .4s; }
+.breakdown { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px; }
+.breakdown-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--fg2); margin-bottom: 8px; }
+.brow { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+.brow:last-child { border-bottom: none; }
+.brow .lbl { color: var(--fg2); }
+.brow .val { font-weight: 600; }
+.brow.total { font-weight: 700; font-size: 13px; }
+.brow.total .lbl { color: var(--fg); }
+
+/* ── Proposta ── */
+.proposta-wrap {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px;
+  position: relative;
+}
+.prop-header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 18px;
+}
+.prop-logo-mark {
+  width: 32px; height: 32px; background: var(--accent); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.prop-logo-mark svg { width: 18px; height: 18px; }
+.prop-brand { flex: 1; }
+.prop-brand h2 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: var(--fg); line-height: 1.2; }
+.prop-brand p { font-size: 11px; color: var(--fg3); margin-top: 1px; }
+.prop-date { font-size: 11px; color: var(--fg3); text-align: right; white-space: nowrap; }
+
+.prop-anunc-field {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  padding: 8px 10px; background: var(--surface2); border-radius: 8px; border: 1px solid var(--border);
+}
+.prop-anunc-field label { font-size: 11px; color: var(--fg3); white-space: nowrap; }
+.prop-anunc-field input {
+  flex: 1; border: none; background: transparent; font-size: 14px; font-weight: 600;
+  color: var(--fg); font-family: 'Inter', sans-serif; outline: none;
+  min-width: 0;
+}
+.prop-anunc-field input::placeholder { color: var(--fg3); font-weight: 400; }
+
+.prop-section { margin-bottom: 16px; }
+.prop-section-title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--fg3); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.prop-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Padarias na proposta */
+.prop-pad-list { display: flex; flex-direction: column; gap: 5px; }
+.prop-pad-item {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+  padding: 7px 10px; background: var(--surface2); border-radius: 8px;
+}
+.prop-pad-info { flex: 1; min-width: 0; }
+.prop-pad-name { font-size: 13px; font-weight: 600; color: var(--fg); line-height: 1.2; }
+.prop-pad-addr { font-size: 11px; color: var(--fg3); margin-top: 1px; display: flex; align-items: center; gap: 3px; }
+.prop-pad-addr svg { flex-shrink: 0; }
+.prop-pad-qty { font-size: 12px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; flex-shrink: 0; }
+.prop-pad-qty span { font-size: 10px; font-weight: 400; color: var(--fg3); display: block; text-align: right; }
+
+/* Resumo financeiro na proposta */
+.prop-fin-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+.prop-fin-row:last-child { border-bottom: none; }
+.prop-fin-row .lbl { color: var(--fg2); }
+.prop-fin-row .val { font-weight: 600; color: var(--fg); }
+.prop-fin-row.total-row {
+  font-size: 15px; font-weight: 700; padding: 8px 10px;
+  background: var(--accent); border-radius: 8px; margin-top: 6px;
+  color: white; border-bottom: none;
+}
+.prop-fin-row.total-row .lbl { color: rgba(255,255,255,.8); }
+.prop-fin-row.total-row .val { color: white; font-size: 17px; }
+
+.prop-obs {
+  font-size: 11px; color: var(--fg3); margin-top: 12px; padding: 8px 10px;
+  background: var(--surface2); border-radius: 6px; line-height: 1.5;
+}
+.prop-obs b { color: var(--fg2); }
+
+.btn-print {
+  width: 100%; margin-top: 14px; padding: 9px 14px;
+  background: var(--accent); color: white; border: none; border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: opacity .15s; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-print:hover { opacity: .88; }
+
+/* Impressão */
+@media print {
+  body { padding: 0; background: white; }
+  .layout > :not(.proposta-wrap) { display: none; }
+  .proposta-wrap { border: none; box-shadow: none; padding: 20px; max-width: 500px; margin: 0 auto; }
+  .btn-print { display: none; }
+  .prop-anunc-field { background: none; border: none; padding: 0; }
+  .prop-anunc-field label { display: none; }
 }
 </style>
 
 <div class="header">
   <div class="logo-mark">
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 2C8 2 4 4 4 9c0 4 2.5 7 6 7s6-3 6-7c0-5-4-7-6-7z" fill="white" opacity=".9"/>
-      <path d="M7 10c1 1.5 5 1.5 6 0" stroke="#CC2229" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
+    <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C8 2 4 4 4 9c0 4 2.5 7 6 7s6-3 6-7c0-5-4-7-6-7z" fill="white" opacity=".9"/><path d="M7 10c1 1.5 5 1.5 6 0" stroke="#CC2229" stroke-width="1.2" stroke-linecap="round"/></svg>
   </div>
   <div class="header-text">
     <h1>Simulador de Campanha</h1>
@@ -374,30 +299,26 @@ body {
 </div>
 
 <div class="layout">
-  <!-- CONTROLES -->
+
+  <!-- ── COLUNA 1: CONTROLES ── -->
   <div class="card">
-    <div class="card-title">Parâmetros da Campanha</div>
+    <div class="card-title">Parâmetros</div>
 
     <div class="field">
       <label>Gramatura do saquinho</label>
       <div class="select-wrap">
-        <select id="gramas">
-          <option value="4">4 kg</option>
-          <option value="5" selected>5 kg</option>
-        </select>
+        <select id="gramas"><option value="4">4 kg</option><option value="5" selected>5 kg</option></select>
       </div>
     </div>
 
     <div class="field">
       <label>Padarias da campanha</label>
-      <div class="pad-list" id="pad-list">
-        <!-- gerado pelo JS -->
-      </div>
+      <div class="pad-list" id="pad-list"></div>
       <div class="pad-total-line">
         <span>Total de saquinhos</span>
         <strong id="pad-total-display">30.000</strong>
       </div>
-      <div class="unit-cost" id="unitCost" style="margin-top:6px"></div>
+      <div class="unit-cost" id="unitCost" style="margin-top:5px"></div>
     </div>
 
     <hr class="divider">
@@ -406,11 +327,6 @@ body {
       <label>Valor cobrado do anunciante (R$)</label>
       <input type="number" id="preco" min="0" step="100" placeholder="ex: 4500">
       <div class="price-suggestion" id="priceSugg"></div>
-    </div>
-
-    <div class="field">
-      <label>Outras despesas (R$)</label>
-      <input type="number" id="despesas" min="0" step="50" value="0" placeholder="arte, frete…">
     </div>
 
     <hr class="divider">
@@ -425,232 +341,340 @@ body {
       <input type="number" id="impressao" min="0" step="10">
     </div>
 
+    <hr class="divider">
+    <div class="card-title" style="margin-bottom:10px">Custos extras</div>
+    <div class="extras-list" id="extras-list"></div>
+    <button class="btn-add" id="btn-add-extra" type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      Adicionar custo extra
+    </button>
+
     <div class="note">Valores baseados na tabela PremiaPão. Ajuste se necessário.</div>
   </div>
 
-  <!-- RESULTADO -->
+  <!-- ── COLUNA 2: RESULTADO FINANCEIRO ── -->
   <div class="card">
-    <div class="card-title">Resultado da Simulação</div>
+    <div class="card-title">Resultado</div>
 
     <div class="result-grid">
       <div class="metric full" id="cardLucro">
         <div class="metric-label">Lucro líquido</div>
         <div class="metric-value" id="valLucro">—</div>
         <div class="metric-sub" id="subLucro"></div>
-        <div class="margin-bar-wrap">
-          <div class="margin-bar-track">
-            <div class="margin-bar-fill" id="barFill" style="width:0%"></div>
-          </div>
-        </div>
+        <div class="margin-bar-track"><div class="margin-bar-fill" id="barFill" style="width:0%"></div></div>
       </div>
       <div class="metric">
         <div class="metric-label">Receita</div>
         <div class="metric-value" id="valReceita">—</div>
-        <div class="metric-sub">cobrado do anunciante</div>
+        <div class="metric-sub">cobrado</div>
       </div>
       <div class="metric">
         <div class="metric-label">Custo total</div>
         <div class="metric-value" id="valCusto">—</div>
-        <div class="metric-sub">saquinhos + despesas</div>
+        <div class="metric-sub">tudo incluído</div>
       </div>
       <div class="metric">
-        <div class="metric-label">Custo/saquinho</div>
+        <div class="metric-label">Custo/saq.</div>
         <div class="metric-value" id="valUnitCusto">—</div>
-        <div class="metric-sub">sem despesas extras</div>
+        <div class="metric-sub">só saquinhos</div>
       </div>
       <div class="metric">
-        <div class="metric-label">Receita/saquinho</div>
+        <div class="metric-label">Receita/saq.</div>
         <div class="metric-value" id="valUnitRec">—</div>
-        <div class="metric-sub">preço ÷ quantidade</div>
+        <div class="metric-sub">preço ÷ qtd</div>
       </div>
     </div>
 
     <div class="breakdown">
-      <div class="breakdown-title">Detalhamento de custos</div>
+      <div class="breakdown-title">Detalhamento</div>
       <div class="brow"><span class="lbl">Clicheria</span><span class="val" id="bClicheria">—</span></div>
       <div class="brow"><span class="lbl">Impressão</span><span class="val" id="bImpressao">—</span></div>
-      <div class="brow"><span class="lbl">Outras despesas</span><span class="val" id="bDespesas">—</span></div>
+      <div id="bExtrasWrap"></div>
       <div class="brow total"><span class="lbl">Total de custos</span><span class="val" id="bTotal">—</span></div>
     </div>
   </div>
+
+  <!-- ── COLUNA 3: PROPOSTA ── -->
+  <div class="proposta-wrap">
+    <div class="prop-header">
+      <div class="prop-logo-mark">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M10 2C8 2 4 4 4 9c0 4 2.5 7 6 7s6-3 6-7c0-5-4-7-6-7z" fill="white" opacity=".9"/><path d="M7 10c1 1.5 5 1.5 6 0" stroke="#CC2229" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="prop-brand">
+        <h2>PremiaPão — Proposta Comercial</h2>
+        <p>Cotia &amp; Granja Viana</p>
+      </div>
+      <div class="prop-date" id="propDate"></div>
+    </div>
+
+    <div class="prop-anunc-field">
+      <label>Anunciante:</label>
+      <input type="text" id="anunciante" placeholder="Nome do anunciante">
+    </div>
+
+    <!-- Padarias -->
+    <div class="prop-section">
+      <div class="prop-section-title">Padarias participantes</div>
+      <div class="prop-pad-list" id="propPadList"></div>
+    </div>
+
+    <!-- Resumo financeiro -->
+    <div class="prop-section">
+      <div class="prop-section-title">Resumo financeiro</div>
+      <div id="propFinRows"></div>
+    </div>
+
+    <div class="prop-obs" id="propObs"></div>
+
+    <button class="btn-print" onclick="window.print()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimir / Salvar PDF
+    </button>
+  </div>
+
 </div>
 
 <script>
-// ── Tabelas de preço PremiaPão ──
 const TABLE = {
-  5: {
-    10000:[1365,3650],15000:[1365,4575],20000:[1365,5400],25000:[1365,6625],
-    30000:[1365,7500],40000:[1365,10000],50000:[1365,12500],60000:[1365,15000],
-    70000:[1365,17500],80000:[1365,20000],90000:[1365,22500],100000:[1365,24500],
-    200000:[1365,49000],300000:[1365,73500],
-  },
-  4: {
-    10000:[1155,3500],15000:[1155,4350],20000:[1155,5200],25000:[1155,6000],
-    30000:[1155,6900],40000:[1155,9200],50000:[1155,11500],60000:[1155,13800],
-    70000:[1155,16100],80000:[1155,18400],90000:[1155,20700],100000:[1155,22500],
-    200000:[1155,45000],300000:[1155,67500],
-  }
+  5:{10000:[1365,3650],15000:[1365,4575],20000:[1365,5400],25000:[1365,6625],30000:[1365,7500],40000:[1365,10000],50000:[1365,12500],60000:[1365,15000],70000:[1365,17500],80000:[1365,20000],90000:[1365,22500],100000:[1365,24500],200000:[1365,49000],300000:[1365,73500]},
+  4:{10000:[1155,3500],15000:[1155,4350],20000:[1155,5200],25000:[1155,6000],30000:[1155,6900],40000:[1155,9200],50000:[1155,11500],60000:[1155,13800],70000:[1155,16100],80000:[1155,18400],90000:[1155,20700],100000:[1155,22500],200000:[1155,45000],300000:[1155,67500]}
 };
 const TABLE_SMALL = {
   5:{1000:2600,2000:2700,3000:2810,4000:2930,5000:3050,6000:3170,7000:3290,8000:3410,9000:3530},
   4:{1000:2570,2000:2690,3000:2800,4000:2900,5000:3000,6000:3100,7000:3200,8000:3300,9000:3400}
 };
 
-// Padarias disponíveis
 const PADARIAS = [
-  { id:'michelli-gv',  nome:'Michelli Pães',  local:'Granja Viana', qtd:7500 },
-  { id:'michelli-sab', nome:'Michelli Pães',  local:'Sabiá',        qtd:7500 },
-  { id:'labelle',      nome:'La Belle Ville', local:'Granja Viana', qtd:7500 },
-  { id:'seculo21',     nome:'Século 21',      local:'KM 26',        qtd:7500 },
+  {id:'michelli-gv',  nome:'Michelli Pães', local:'Granja Viana', addr:'Av. Eid Mansur, 835',      qtd:7500},
+  {id:'michelli-sab', nome:'Michelli Pães', local:'Sabiá',         addr:'Estr. do Capuava, 130',    qtd:7500},
+  {id:'labelle',      nome:'La Belle Ville',local:'Granja Viana', addr:'Estr. Fernando Nobre, 810', qtd:7500},
+  {id:'seculo21',     nome:'Século 21',     local:'KM 26',         addr:'Estr. Velha de Cotia, 123', qtd:7500},
 ];
+const QTY_OPTS  = [1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,15000,20000,25000,30000];
+const QTY_LABEL = {1000:'1.000',2000:'2.000',3000:'3.000',4000:'4.000',5000:'5.000',6000:'6.000',7000:'7.000',8000:'8.000',9000:'9.000',10000:'10.000',15000:'15.000',20000:'20.000',25000:'25.000',30000:'30.000'};
 
-const QTY_OPTS = [1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,15000,20000,25000,30000];
-const QTY_LABELS = {
-  1000:'1.000',2000:'2.000',3000:'3.000',4000:'4.000',5000:'5.000',
-  6000:'6.000',7000:'7.000',8000:'8.000',9000:'9.000',
-  10000:'10.000',15000:'15.000',20000:'20.000',25000:'25.000',30000:'30.000'
-};
+function fmtPt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function brl0(n){return 'R$ '+fmtPt(n);}
+const PIN_SVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
-function fmtPt(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.'); }
-function brl0(n) { return 'R$ ' + fmtPt(Math.round(n)); }
-
-// Monta os cards de padaria
-function buildPadList() {
+// ── Padarias ──
+function buildPadList(){
   const list = document.getElementById('pad-list');
   list.innerHTML = '';
-  PADARIAS.forEach(p => {
+  PADARIAS.forEach(p=>{
     const row = document.createElement('div');
     row.className = 'pad-row';
-    row.id = 'pr-' + p.id;
-
-    const opts = QTY_OPTS.map(v =>
-      `<option value="${v}"${v===p.qtd?' selected':''}>${QTY_LABELS[v]}</option>`
-    ).join('');
-
+    row.id = 'pr-'+p.id;
+    const opts = QTY_OPTS.map(v=>`<option value="${v}"${v===p.qtd?' selected':''}>${QTY_LABEL[v]}</option>`).join('');
     row.innerHTML = `
       <input type="checkbox" id="chk-${p.id}" checked>
       <div class="pad-row-name">${p.nome}<span>${p.local}</span></div>
-      <select id="pqty-${p.id}">${opts}</select>
-    `;
+      <select id="pqty-${p.id}">${opts}</select>`;
     list.appendChild(row);
-
     const chk = row.querySelector('#chk-'+p.id);
     const sel = row.querySelector('#pqty-'+p.id);
-
-    chk.addEventListener('change', onPadChange);
-    sel.addEventListener('change', onPadChange);
-
-    // Clicar na row (nome/área) também faz toggle do checkbox
-    row.addEventListener('click', e => {
-      if (e.target === chk || e.target === sel || e.target.closest('select')) return;
-      chk.checked = !chk.checked;
-      onPadChange();
+    chk.addEventListener('change', calc);
+    sel.addEventListener('change', calc);
+    row.addEventListener('click', e=>{
+      if(e.target===chk||e.target===sel||e.target.closest('select'))return;
+      chk.checked=!chk.checked; calc();
     });
   });
 }
 
-function getTotalQtde() {
-  let total = 0;
-  PADARIAS.forEach(p => {
-    const chk = document.getElementById('chk-'+p.id);
-    const qty = parseInt(document.getElementById('pqty-'+p.id).value);
-    const row = document.getElementById('pr-'+p.id);
-    if (chk.checked) {
-      row.classList.remove('disabled');
-      total += qty;
-    } else {
-      row.classList.add('disabled');
-    }
+// ── Custos extras ──
+let extrasData = [];
+let extraId = 0;
+
+function addExtra(nome='', valor=0){
+  const id = 'ex'+extraId++;
+  extrasData.push({id, nome, valor});
+  renderExtras();
+}
+function removeExtra(id){
+  extrasData = extrasData.filter(e=>e.id!==id);
+  renderExtras(); calc();
+}
+function renderExtras(){
+  const wrap = document.getElementById('extras-list');
+  wrap.innerHTML='';
+  extrasData.forEach(ex=>{
+    const div = document.createElement('div');
+    div.className='extra-item';
+    div.innerHTML=`
+      <input type="text" placeholder="Ex: Locomoção, Promoter…" value="${ex.nome}" data-id="${ex.id}" data-field="nome">
+      <input type="number" placeholder="R$" value="${ex.valor||''}" min="0" step="10" data-id="${ex.id}" data-field="valor">
+      <button class="btn-del" data-id="${ex.id}" title="Remover">×</button>`;
+    wrap.appendChild(div);
+    div.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', e=>{
+      const item = extrasData.find(x=>x.id===e.target.dataset.id);
+      if(item){
+        if(e.target.dataset.field==='nome') item.nome=e.target.value;
+        else item.valor=parseFloat(e.target.value)||0;
+      }
+      calc();
+    }));
+    div.querySelector('.btn-del').addEventListener('click', e=>removeExtra(e.target.dataset.id));
+  });
+}
+
+document.getElementById('btn-add-extra').addEventListener('click', ()=>{ addExtra(); });
+
+// ── Cálculo ──
+function getTotalQtde(){
+  let total=0;
+  PADARIAS.forEach(p=>{
+    const chk=document.getElementById('chk-'+p.id);
+    const qty=parseInt(document.getElementById('pqty-'+p.id).value);
+    const row=document.getElementById('pr-'+p.id);
+    if(chk.checked){row.classList.remove('disabled'); total+=qty;}
+    else row.classList.add('disabled');
   });
   return total;
 }
-
-function findClosestQtde(total, g) {
-  // busca o menor valor de tabela >= total; se não, o maior disponível
-  const all = [
-    ...Object.keys(TABLE_SMALL[g]),
-    ...Object.keys(TABLE[g])
-  ].map(Number).sort((a,b)=>a-b);
-  return all.find(v => v >= total) || all[all.length-1];
+function findClosestQtde(total,g){
+  const all=[...Object.keys(TABLE_SMALL[g]),...Object.keys(TABLE[g])].map(Number).sort((a,b)=>a-b);
+  return all.find(v=>v>=total)||all[all.length-1];
 }
-
-function getCosts(g, q) {
-  if (TABLE[g][q])       return { clicheria: TABLE[g][q][0], impressao: TABLE[g][q][1] };
-  if (TABLE_SMALL[g][q]) { const t=TABLE_SMALL[g][q], c=g===5?1365:1155; return {clicheria:c,impressao:t-c}; }
+function getCosts(g,q){
+  if(TABLE[g][q]) return{clicheria:TABLE[g][q][0],impressao:TABLE[g][q][1]};
+  if(TABLE_SMALL[g][q]){const t=TABLE_SMALL[g][q],c=g===5?1365:1155;return{clicheria:c,impressao:t-c};}
   return null;
 }
 
-function onPadChange() { calc(); }
+function calc(){
+  const g=parseInt(document.getElementById('gramas').value);
+  const total=getTotalQtde();
+  document.getElementById('pad-total-display').textContent=fmtPt(total);
+  const q=findClosestQtde(total,g);
+  const costs=getCosts(g,q);
+  if(!costs)return;
 
-function calc() {
-  const g     = parseInt(document.getElementById('gramas').value);
-  const total = getTotalQtde();
+  const inpClich=document.getElementById('clicheria');
+  const inpImpr=document.getElementById('impressao');
+  inpClich.value=costs.clicheria;
+  inpImpr.value=costs.impressao;
 
-  // exibe total no rodapé da lista
-  document.getElementById('pad-total-display').textContent = fmtPt(total);
+  const clich=parseFloat(inpClich.value)||costs.clicheria;
+  const impr=parseFloat(inpImpr.value)||costs.impressao;
+  const totalExtras=extrasData.reduce((s,e)=>s+(e.valor||0),0);
+  const totalSac=clich+impr;
+  const totalCusto=totalSac+totalExtras;
+  const preco=parseFloat(document.getElementById('preco').value)||0;
+  const lucro=preco-totalCusto;
+  const margin=preco>0?(lucro/preco)*100:0;
+  const unitCusto=total>0?totalSac/total:0;
+  const unitRec=preco>0&&total>0?preco/total:0;
 
-  // encontra faixa de tabela mais próxima para o total
-  const q     = findClosestQtde(total, g);
-  const costs = getCosts(g, q);
-  if (!costs) return;
+  document.getElementById('unitCost').textContent='Faixa: '+fmtPt(q)+' un · R$ '+unitCusto.toFixed(4).replace('.',',') +'/saq · '+brl0(totalSac);
+  const sug=Math.ceil(totalSac*1.4/100)*100;
+  document.getElementById('priceSugg').textContent='Sugestão c/ margem 40%: '+brl0(sug);
 
-  const inpClich = document.getElementById('clicheria');
-  const inpImpr  = document.getElementById('impressao');
-  inpClich.value = costs.clicheria;
-  inpImpr.value  = costs.impressao;
+  document.getElementById('valReceita').textContent=preco>0?brl0(preco):'—';
+  document.getElementById('valCusto').textContent=brl0(totalCusto);
+  document.getElementById('valUnitCusto').textContent=total>0?'R$ '+unitCusto.toFixed(4).replace('.',','):'—';
+  document.getElementById('valUnitRec').textContent=preco>0&&total>0?'R$ '+unitRec.toFixed(4).replace('.',','):'—';
 
-  const clich = parseFloat(inpClich.value) || costs.clicheria;
-  const impr  = parseFloat(inpImpr.value)  || costs.impressao;
-  const desp  = parseFloat(document.getElementById('despesas').value) || 0;
-  const preco = parseFloat(document.getElementById('preco').value)    || 0;
-
-  const totalSac   = clich + impr;
-  const totalCusto = totalSac + desp;
-  const lucro      = preco - totalCusto;
-  const margin     = preco > 0 ? (lucro / preco) * 100 : 0;
-  const unitCusto  = total > 0 ? totalSac / total : 0;
-  const unitRec    = (preco > 0 && total > 0) ? preco / total : 0;
-
-  // hint faixa usada
-  document.getElementById('unitCost').textContent =
-    'Faixa tabela: ' + fmtPt(q) + ' un · Custo/saq: R$ ' + unitCusto.toFixed(4).replace('.',',') + ' · Total: ' + brl0(totalSac);
-
-  const sug = Math.ceil(totalSac * 1.4 / 100) * 100;
-  document.getElementById('priceSugg').textContent = 'Sugestão c/ margem 40%: ' + brl0(sug);
-
-  document.getElementById('valReceita').textContent   = preco > 0 ? brl0(preco) : '—';
-  document.getElementById('valCusto').textContent     = brl0(totalCusto);
-  document.getElementById('valUnitCusto').textContent = total > 0 ? 'R$ ' + unitCusto.toFixed(4).replace('.',',') : '—';
-  document.getElementById('valUnitRec').textContent   = preco > 0 && total > 0 ? 'R$ ' + unitRec.toFixed(4).replace('.',',') : '—';
-
-  const cardLucro = document.getElementById('cardLucro');
-  const barFill   = document.getElementById('barFill');
-
-  if (preco > 0) {
-    document.getElementById('valLucro').textContent  = brl0(lucro);
-    document.getElementById('subLucro').textContent  = 'Margem: ' + margin.toFixed(1).replace('.',',') + '%';
-    barFill.style.width = Math.max(0,Math.min(100,margin)) + '%';
-    barFill.style.background = lucro >= 0 ? 'var(--green)' : 'var(--red)';
-    cardLucro.className = 'metric full ' + (lucro >= 0 ? 'highlight-green' : 'highlight-red');
+  const cardLucro=document.getElementById('cardLucro');
+  const barFill=document.getElementById('barFill');
+  if(preco>0){
+    document.getElementById('valLucro').textContent=brl0(lucro);
+    document.getElementById('subLucro').textContent='Margem: '+margin.toFixed(1).replace('.',',')+'%';
+    barFill.style.width=Math.max(0,Math.min(100,margin))+'%';
+    barFill.style.background=lucro>=0?'var(--green)':'var(--red)';
+    cardLucro.className='metric full '+(lucro>=0?'highlight-green':'highlight-red');
   } else {
-    document.getElementById('valLucro').textContent = '—';
-    document.getElementById('subLucro').textContent = 'Informe o valor cobrado';
-    barFill.style.width = '0%';
-    cardLucro.className = 'metric full';
+    document.getElementById('valLucro').textContent='—';
+    document.getElementById('subLucro').textContent='Informe o valor cobrado';
+    barFill.style.width='0%';
+    cardLucro.className='metric full';
   }
 
-  document.getElementById('bClicheria').textContent = brl0(clich);
-  document.getElementById('bImpressao').textContent = brl0(impr);
-  document.getElementById('bDespesas').textContent  = desp > 0 ? brl0(desp) : '—';
-  document.getElementById('bTotal').textContent     = brl0(totalCusto);
+  document.getElementById('bClicheria').textContent=brl0(clich);
+  document.getElementById('bImpressao').textContent=brl0(impr);
+  // breakdown extras
+  const bExtras=document.getElementById('bExtrasWrap');
+  bExtras.innerHTML='';
+  extrasData.forEach(ex=>{
+    if(!ex.nome&&!ex.valor)return;
+    const d=document.createElement('div');
+    d.className='brow';
+    d.innerHTML=`<span class="lbl">${ex.nome||'Custo extra'}</span><span class="val">${brl0(ex.valor||0)}</span>`;
+    bExtras.appendChild(d);
+  });
+  document.getElementById('bTotal').textContent=brl0(totalCusto);
+
+  // ── Proposta ──
+  updateProposta(g, total, q, clich, impr, preco, totalExtras, totalCusto, lucro, margin);
+}
+
+function updateProposta(g, totalQtd, q, clich, impr, preco, totalExtras, totalCusto, lucro, margin){
+  // Padarias ativas
+  const padAtivas=PADARIAS.filter(p=>document.getElementById('chk-'+p.id).checked);
+  const propList=document.getElementById('propPadList');
+  propList.innerHTML='';
+  padAtivas.forEach(p=>{
+    const qty=parseInt(document.getElementById('pqty-'+p.id).value);
+    const div=document.createElement('div');
+    div.className='prop-pad-item';
+    div.innerHTML=`
+      <div class="prop-pad-info">
+        <div class="prop-pad-name">${p.nome} — ${p.local}</div>
+        <div class="prop-pad-addr">${PIN_SVG}${p.addr}</div>
+      </div>
+      <div class="prop-pad-qty">${fmtPt(qty)}<span>saquinhos</span></div>`;
+    propList.appendChild(div);
+  });
+  if(padAtivas.length===0) propList.innerHTML='<div style="font-size:12px;color:var(--fg3);padding:6px 0">Nenhuma padaria selecionada</div>';
+
+  // Resumo financeiro
+  const finWrap=document.getElementById('propFinRows');
+  finWrap.innerHTML='';
+
+  const rows=[
+    {lbl:'Saquinhos', val:fmtPt(totalQtd)+' un ('+g+'kg)'},
+    {lbl:'Clicheria', val:brl0(clich)},
+    {lbl:'Impressão', val:brl0(impr)},
+  ];
+  extrasData.forEach(ex=>{
+    if(ex.nome||ex.valor) rows.push({lbl:ex.nome||'Custo extra', val:brl0(ex.valor||0)});
+  });
+  if(preco>0) rows.push({lbl:'Valor cobrado', val:brl0(preco)});
+
+  rows.forEach(r=>{
+    const d=document.createElement('div');
+    d.className='prop-fin-row';
+    d.innerHTML=`<span class="lbl">${r.lbl}</span><span class="val">${r.val}</span>`;
+    finWrap.appendChild(d);
+  });
+
+  // Total em destaque
+  const tot=document.createElement('div');
+  tot.className='prop-fin-row total-row';
+  tot.innerHTML=`<span class="lbl">Investimento total</span><span class="val">${preco>0?brl0(preco):brl0(totalCusto)}</span>`;
+  finWrap.appendChild(tot);
+
+  // Obs
+  const obs=document.getElementById('propObs');
+  const partes=[];
+  if(padAtivas.length>0) partes.push(`<b>${padAtivas.length} padaria${padAtivas.length>1?'s':''}</b>, <b>${fmtPt(totalQtd)} saquinhos</b> de ${g}kg`);
+  if(preco>0) partes.push(`investimento <b>${brl0(preco)}</b> (custo direto: ${brl0(totalCusto)})`);
+  obs.innerHTML = partes.length ? 'Campanha com '+partes.join(' · ')+'.' : 'Configure os parâmetros ao lado para gerar a proposta.';
+}
+
+// data
+function setDate(){
+  const d=new Date();
+  document.getElementById('propDate').textContent=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 }
 
 document.getElementById('gramas').addEventListener('change', calc);
 document.getElementById('preco').addEventListener('input', calc);
-document.getElementById('despesas').addEventListener('input', calc);
 document.getElementById('clicheria').addEventListener('input', calc);
 document.getElementById('impressao').addEventListener('input', calc);
+document.getElementById('anunciante').addEventListener('input', ()=>{});
 
 buildPadList();
+setDate();
 calc();
 </script>
