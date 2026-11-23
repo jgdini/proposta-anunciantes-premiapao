@@ -284,6 +284,31 @@ body {
 }
 .btn-gerar:hover { opacity: .88; }
 
+/* upload mockup na calculadora */
+.mockup-upload-box {
+  border: 2px dashed var(--border); border-radius: 10px;
+  cursor: pointer; overflow: hidden; transition: border-color .15s;
+  min-height: 70px; display: flex; align-items: center; justify-content: center;
+}
+.mockup-upload-box:hover { border-color: var(--accent); }
+.mockup-upload-placeholder {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 16px; color: var(--fg3); font-size: 12px;
+}
+.mockup-upload-placeholder svg { flex-shrink: 0; color: var(--fg3); }
+.mockup-upload-preview {
+  position: relative; width: 100%;
+}
+.mockup-upload-preview img {
+  width: 100%; max-height: 160px; object-fit: contain; display: block;
+}
+.mockup-remove-btn {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(0,0,0,.55); color: white; border: none; border-radius: 5px;
+  font-size: 11px; padding: 3px 8px; cursor: pointer; font-family: 'Inter', sans-serif;
+}
+.mockup-remove-btn:hover { background: var(--red); }
+
 /* Impressão */
 @media print {
   body { padding: 0; background: white; }
@@ -414,28 +439,25 @@ body {
       <div class="prop-date" id="propDate"></div>
     </div>
 
-    <div class="prop-anunc-field">
-      <label>Anunciante:</label>
-      <input type="text" id="anunciante" placeholder="Nome do anunciante">
-    </div>
-
-    <!-- Padarias -->
+    <!-- Resumo financeiro interno -->
     <div class="prop-section">
-      <div class="prop-section-title">Padarias participantes</div>
+      <div class="prop-section-title">Padarias</div>
       <div class="prop-pad-list" id="propPadList"></div>
     </div>
-
-    <!-- Resumo financeiro -->
     <div class="prop-section">
-      <div class="prop-section-title">Resumo financeiro</div>
+      <div class="prop-section-title">Financeiro</div>
       <div id="propFinRows"></div>
     </div>
-
     <div class="prop-obs" id="propObs"></div>
 
-    <!-- Campos extras da proposta do cliente -->
+    <!-- Dados da Proposta do Cliente -->
     <hr style="border:none;border-top:1px solid var(--border);margin:14px 0">
-    <div class="card-title" style="margin-bottom:10px;font-size:11px">Dados para proposta do cliente</div>
+    <div class="card-title" style="margin-bottom:12px">Dados da Proposta</div>
+
+    <div class="field" style="margin-bottom:8px">
+      <label>Nome do Cliente</label>
+      <input type="text" id="anunciante" placeholder="Ex: Farmácia São João">
+    </div>
 
     <div class="field" style="margin-bottom:8px">
       <label>Período da campanha</label>
@@ -446,12 +468,27 @@ body {
       <input type="date" id="prop-validade">
     </div>
     <div class="field" style="margin-bottom:8px">
-      <label>Observações (aparecem na proposta)</label>
-      <input type="text" id="prop-obs" placeholder="Arte inclusa, 15 dias de prazo…">
+      <label>Observações (visíveis na proposta)</label>
+      <input type="text" id="prop-obs-cliente" placeholder="Arte inclusa, 15 dias de prazo…">
     </div>
-    <div class="field" style="margin-bottom:12px">
+    <div class="field" style="margin-bottom:8px">
       <label>Contato / WhatsApp</label>
       <input type="text" id="prop-contato" placeholder="(11) 99999-9999">
+    </div>
+
+    <div class="field" style="margin-bottom:12px">
+      <label>Mockup da arte</label>
+      <div class="mockup-upload-box" id="mockupUploadBox" onclick="document.getElementById('mockup-file').click()">
+        <div class="mockup-upload-placeholder" id="mockupPlaceholder">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Clique para adicionar o mockup</span>
+        </div>
+        <div class="mockup-upload-preview" id="mockupPreview" style="display:none">
+          <img id="mockupThumb" src="" alt="">
+          <button class="mockup-remove-btn" type="button" onclick="event.stopPropagation();removeMockup()">✕ Remover</button>
+        </div>
+      </div>
+      <input type="file" id="mockup-file" accept="image/*" style="display:none">
     </div>
 
     <button class="btn-gerar" id="btnGerar" type="button">
@@ -716,6 +753,39 @@ document.getElementById('clicheria').addEventListener('input', calc);
 document.getElementById('impressao').addEventListener('input', calc);
 document.getElementById('anunciante').addEventListener('input', ()=>{});
 
+// ── Mockup upload ──
+let mockupBase64 = '';
+document.getElementById('mockup-file').addEventListener('change', function(){
+  const file = this.files[0];
+  if(!file) return;
+  // Reduz a imagem antes de embutir no link
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 900;
+      const ratio = Math.min(MAX/img.width, MAX/img.height, 1);
+      canvas.width  = Math.round(img.width  * ratio);
+      canvas.height = Math.round(img.height * ratio);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      mockupBase64 = canvas.toDataURL('image/jpeg', 0.82);
+      document.getElementById('mockupThumb').src = mockupBase64;
+      document.getElementById('mockupPlaceholder').style.display = 'none';
+      document.getElementById('mockupPreview').style.display = '';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+function removeMockup(){
+  mockupBase64 = '';
+  document.getElementById('mockupThumb').src = '';
+  document.getElementById('mockupPreview').style.display = 'none';
+  document.getElementById('mockupPlaceholder').style.display = '';
+  document.getElementById('mockup-file').value = '';
+}
+
 // ── Gerar link da proposta do cliente ──
 function gerarLinkProposta(){
   const g = parseInt(document.getElementById('gramas').value);
@@ -726,7 +796,7 @@ function gerarLinkProposta(){
     ? new Date(document.getElementById('prop-validade').value + 'T12:00:00')
         .toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})
     : '';
-  const obs     = document.getElementById('prop-obs').value.trim();
+  const obs     = document.getElementById('prop-obs-cliente').value.trim();
   const contato = document.getElementById('prop-contato').value.trim();
 
   // Padarias ativas — só o que o cliente vê (sem custo)
@@ -746,6 +816,7 @@ function gerarLinkProposta(){
     anunciante, preco, gramas: g,
     padarias,
     periodo, validade, obs, contato,
+    mockup: mockupBase64 || '',
     extras: []  // nunca passa custos internos
   };
 

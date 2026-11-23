@@ -119,27 +119,14 @@ body {
 
 /* ── MOCKUP ── */
 .mockup-box {
-  margin-top: 20px; border: 2px dashed var(--border); border-radius: 14px;
-  overflow: hidden; position: relative; min-height: 200px;
-  background: var(--surface); cursor: pointer;
-  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;
+  margin-top: 20px; border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; background: var(--surface);
 }
-.mockup-box img { width: 100%; max-height: 400px; object-fit: contain; display: none; }
-.mockup-box.has-img img { display: block; }
-.mockup-box.has-img .mockup-placeholder { display: none; }
-.mockup-box.has-img { border-style: solid; border-color: var(--border); }
-.mockup-placeholder { text-align: center; padding: 32px 20px; pointer-events: none; }
-.mockup-placeholder svg { color: var(--fg3); margin-bottom: 10px; }
-.mockup-placeholder p { font-size: 13px; color: var(--fg3); }
-.mockup-placeholder strong { color: var(--fg2); font-size: 14px; display: block; margin-bottom: 4px; }
-#mockup-input { display: none; }
-.mockup-change-btn {
-  position: absolute; bottom: 10px; right: 10px;
-  background: rgba(0,0,0,.55); color: white; border: none; border-radius: 6px;
-  font-size: 11px; padding: 5px 10px; cursor: pointer; display: none;
-  font-family: 'Inter', sans-serif;
+.mockup-box img { width: 100%; max-height: 420px; object-fit: contain; display: block; }
+.mockup-empty {
+  text-align: center; padding: 48px 20px; color: var(--fg3); font-size: 13px;
 }
-.mockup-box.has-img .mockup-change-btn { display: block; }
+.mockup-empty svg { margin-bottom: 10px; opacity: .4; }
 
 /* ── PERÍODO ── */
 .periodo-box {
@@ -257,20 +244,13 @@ body {
   </div>
 
   <!-- MOCKUP -->
-  <div class="section">
+  <div class="section" id="secMockup" style="display:none">
     <div class="section-label">Arte da campanha</div>
     <div class="section-title">Seu anúncio no saquinho</div>
     <p class="section-desc">Arte personalizada, aprovada antes da impressão.</p>
-    <div class="mockup-box" id="mockupBox" onclick="document.getElementById('mockup-input').click()">
-      <div class="mockup-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <strong>Clique para adicionar o mockup</strong>
-        <p>Sobe a imagem da arte criada para esta proposta</p>
-      </div>
+    <div class="mockup-box">
       <img id="mockupImg" src="" alt="Mockup da arte">
-      <button class="mockup-change-btn" onclick="event.stopPropagation();document.getElementById('mockup-input').click()">Trocar imagem</button>
     </div>
-    <input type="file" id="mockup-input" accept="image/*">
   </div>
 
   <!-- PERÍODO -->
@@ -398,21 +378,17 @@ function render(d){
     document.getElementById('obsBox').textContent = d.obs;
   }
 
+  // Mockup
+  if(d.mockup){
+    document.getElementById('secMockup').style.display = '';
+    document.getElementById('mockupImg').src = d.mockup;
+  }
+
   // Rodapé
   if(d.contato) document.getElementById('footerContact').textContent = d.contato;
 }
 
-// Mockup upload
-document.getElementById('mockup-input').addEventListener('change', function(){
-  const file = this.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    document.getElementById('mockupImg').src = e.target.result;
-    document.getElementById('mockupBox').classList.add('has-img');
-  };
-  reader.readAsDataURL(file);
-});
+// Mockup embutido no link — sem interação do cliente
 
 const data = decodeData();
 if(data) render(data);
