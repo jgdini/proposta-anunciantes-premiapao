@@ -401,7 +401,80 @@
       .depo { padding: 32px 22px; }
       .depo-q { font-size: 17px; }
     }
-  </style>
+  
+    /* ── Padaria card interativo ── */
+    .pad-card {
+      position: relative;
+    }
+    .pad-qty-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .pad-qty-label {
+      font-size: 11px;
+      color: var(--sub);
+      flex-shrink: 0;
+    }
+    .pad-qty-select {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(204,34,41,0.08);
+      border: 1px solid rgba(204,34,41,0.25);
+      border-radius: 6px;
+      padding: 3px 8px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+    }
+    .pad-qty-select:focus { border-color: var(--primary); }
+    .pad-toggle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--sub);
+      cursor: pointer;
+      user-select: none;
+    }
+    .pad-toggle input[type=checkbox] {
+      accent-color: var(--primary);
+      width: 15px; height: 15px;
+      cursor: pointer;
+    }
+    .pad-card.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .pad-card.disabled .pad-toggle {
+      pointer-events: auto;
+      opacity: 1;
+    }
+    .pad-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(204,34,41,0.2);
+      font-size: 13px;
+      color: var(--sub);
+      font-weight: 500;
+    }
+    .pad-total-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    </style>
 </head>
 <body>
 
@@ -719,7 +792,7 @@ ppShow(0);
     <h2>O que você leva<br>com a PremiaPão em Cotia</h2>
     <div class="cotia-stats">
       <div class="cs">
-        <span class="cs-n" data-count="30" data-suffix="mil"><span class="count-val">0</span><span class="cs-u">mil</span></span>
+        <span class="cs-n" id="stat-saq"><span class="count-val" id="stat-saq-val">30</span><span class="cs-u">mil</span></span>
         <span class="cs-l">Saquinhos por campanha</span>
       </div>
       <div class="cs">
@@ -727,18 +800,21 @@ ppShow(0);
         <span class="cs-l">Saquinhos por mês</span>
       </div>
       <div class="cs">
-        <span class="cs-n" data-count="4"><span class="count-val">0</span></span>
+        <span class="cs-n" id="stat-pad"><span class="count-val" id="stat-pad-val">4</span></span>
         <span class="cs-l">Padarias parceiras em Cotia</span>
       </div>
       <div class="cs">
-        <span class="cs-n" data-count="120" data-suffix="mil"><span class="count-val">0</span><span class="cs-u">mil</span></span>
+        <span class="cs-n" id="stat-imp"><span class="count-val" id="stat-imp-val">120</span><span class="cs-u">mil</span></span>
         <span class="cs-l">Impressões por campanha</span>
       </div>
     </div>
-    <p class="cotia-note">Média de 4 pessoas por domicílio (IBGE) &times; 30.000 saquinhos = 120.000 impressões</p>
+    <p class="cotia-note" id="cotia-note">Média de 4 pessoas por domicílio (IBGE) &times; <span id="note-saq">30.000</span> saquinhos = <span id="note-imp">120.000</span> impressões</p>
 
-    <div class="padarias-grid">
-      <div class="pad-card">
+        <div class="padarias-grid" id="padarias-grid">
+      <div class="pad-card" id="pc-michelli-gv">
+        <label class="pad-toggle">
+          <input type="checkbox" id="chk-michelli-gv" checked onchange="updatePadarias()"> Incluir
+        </label>
         <div class="pad-icon"><svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
   <!-- outer ring -->
   <circle cx="20" cy="20" r="18.5" fill="rgba(244,123,32,0.08)" stroke="#F47B20" stroke-width="1.2"/>
@@ -757,9 +833,18 @@ ppShow(0);
         <div>
           <p class="pad-name">Michelli Pães — Granja Viana</p>
           <p class="pad-desc">Alto fluxo de famílias residentes da Granja Viana</p>
+          <div class="pad-qty-row">
+            <span class="pad-qty-label">Saquinhos:</span>
+            <select class="pad-qty-select" id="qty-michelli-gv" onchange="updatePadarias()">
+              <option value="1000">1.000</option><option value="2000">2.000</option><option value="3000">3.000</option><option value="4000">4.000</option><option value="5000">5.000</option><option value="6000">6.000</option><option value="7000">7.000</option><option value="8000">8.000</option><option value="9000">9.000</option><option value="10000">10.000</option><option value="15000">15.000</option><option value="20000">20.000</option><option value="25000">25.000</option><option value="30000">30.000</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="pad-card">
+      <div class="pad-card" id="pc-michelli-sab">
+        <label class="pad-toggle">
+          <input type="checkbox" id="chk-michelli-sab" checked onchange="updatePadarias()"> Incluir
+        </label>
         <div class="pad-icon"><svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
   <!-- outer ring -->
   <circle cx="20" cy="20" r="18.5" fill="rgba(244,123,32,0.08)" stroke="#F47B20" stroke-width="1.2"/>
@@ -778,9 +863,18 @@ ppShow(0);
         <div>
           <p class="pad-name">Michelli Pães — Sabiá</p>
           <p class="pad-desc">Cobertura do bairro Sabiá e arredores em Cotia</p>
+          <div class="pad-qty-row">
+            <span class="pad-qty-label">Saquinhos:</span>
+            <select class="pad-qty-select" id="qty-michelli-sab" onchange="updatePadarias()">
+              <option value="1000">1.000</option><option value="2000">2.000</option><option value="3000">3.000</option><option value="4000">4.000</option><option value="5000">5.000</option><option value="6000">6.000</option><option value="7000">7.000</option><option value="8000">8.000</option><option value="9000">9.000</option><option value="10000">10.000</option><option value="15000">15.000</option><option value="20000">20.000</option><option value="25000">25.000</option><option value="30000">30.000</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="pad-card">
+      <div class="pad-card" id="pc-labelle">
+        <label class="pad-toggle">
+          <input type="checkbox" id="chk-labelle" checked onchange="updatePadarias()"> Incluir
+        </label>
         <div class="pad-icon"><svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
   <!-- outer ring -->
   <circle cx="20" cy="20" r="18.5" fill="rgba(244,123,32,0.08)" stroke="#F47B20" stroke-width="1.2"/>
@@ -799,9 +893,18 @@ ppShow(0);
         <div>
           <p class="pad-name">La Belle Ville — Granja Viana</p>
           <p class="pad-desc">Padaria premium com público de alta renda</p>
+          <div class="pad-qty-row">
+            <span class="pad-qty-label">Saquinhos:</span>
+            <select class="pad-qty-select" id="qty-labelle" onchange="updatePadarias()">
+              <option value="1000">1.000</option><option value="2000">2.000</option><option value="3000">3.000</option><option value="4000">4.000</option><option value="5000">5.000</option><option value="6000">6.000</option><option value="7000">7.000</option><option value="8000">8.000</option><option value="9000">9.000</option><option value="10000">10.000</option><option value="15000">15.000</option><option value="20000">20.000</option><option value="25000">25.000</option><option value="30000">30.000</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="pad-card">
+      <div class="pad-card" id="pc-seculo21">
+        <label class="pad-toggle">
+          <input type="checkbox" id="chk-seculo21" checked onchange="updatePadarias()"> Incluir
+        </label>
         <div class="pad-icon"><svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
   <!-- outer ring -->
   <circle cx="20" cy="20" r="18.5" fill="rgba(244,123,32,0.08)" stroke="#F47B20" stroke-width="1.2"/>
@@ -820,7 +923,17 @@ ppShow(0);
         <div>
           <p class="pad-name">Século 21 — KM 26</p>
           <p class="pad-desc">Grande volume de clientes no eixo da Raposo Tavares</p>
+          <div class="pad-qty-row">
+            <span class="pad-qty-label">Saquinhos:</span>
+            <select class="pad-qty-select" id="qty-seculo21" onchange="updatePadarias()">
+              <option value="1000">1.000</option><option value="2000">2.000</option><option value="3000">3.000</option><option value="4000">4.000</option><option value="5000">5.000</option><option value="6000">6.000</option><option value="7000">7.000</option><option value="8000">8.000</option><option value="9000">9.000</option><option value="10000">10.000</option><option value="15000">15.000</option><option value="20000">20.000</option><option value="25000">25.000</option><option value="30000">30.000</option>
+            </select>
+          </div>
         </div>
+      </div>
+      <div class="pad-total-row" id="pad-total-row">
+        <span>Total de saquinhos selecionados</span>
+        <span class="pad-total-val" id="pad-total-val">30.000</span>
       </div>
     </div>
   </div>
@@ -1011,5 +1124,53 @@ ppShow(0);
   counters.forEach(el => observer.observe(el));
 })();
 </script>
+
+<script>
+function fmtMil(n) {
+  if (n >= 1000) return (n/1000).toFixed(0) + '.000';
+  return n.toString();
+}
+function fmtPt(n) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+function updatePadarias() {
+  var ids = ['michelli-gv','michelli-sab','labelle','seculo21'];
+  var total = 0;
+  var count = 0;
+  ids.forEach(function(id) {
+    var chk = document.getElementById('chk-' + id);
+    var qty = parseInt(document.getElementById('qty-' + id).value);
+    var card = document.getElementById('pc-' + id);
+    if (chk && chk.checked) {
+      card.classList.remove('disabled');
+      total += qty;
+      count++;
+    } else {
+      card.classList.add('disabled');
+    }
+  });
+  // update total row
+  var tv = document.getElementById('pad-total-val');
+  if (tv) tv.textContent = fmtPt(total);
+  // update stats
+  var sv = document.getElementById('stat-saq-val');
+  if (sv) sv.textContent = total >= 1000 ? (total/1000).toFixed(0) : total;
+  var pv = document.getElementById('stat-pad-val');
+  if (pv) pv.textContent = count;
+  var iv = document.getElementById('stat-imp-val');
+  if (iv) iv.textContent = Math.round(total * 4 / 1000);
+  // update note
+  var ns = document.getElementById('note-saq');
+  if (ns) ns.textContent = fmtPt(total);
+  var ni = document.getElementById('note-imp');
+  if (ni) ni.textContent = fmtPt(total * 4);
+  // also update per-month stat (total / 3 months)
+  var mv = document.getElementById('stat-mes-val');
+  if (mv) mv.textContent = Math.round(total / 3 / 1000);
+}
+// run on load
+document.addEventListener('DOMContentLoaded', updatePadarias);
+</script>
+
 </body>
 </html>
