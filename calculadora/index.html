@@ -287,21 +287,34 @@ body {
 .brow.total .lbl { color: var(--fg); }
 
 /* ── Padarias ── */
-.pad-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
+.pad-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
 .pad-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: var(--surface2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 10px;
-  transition: opacity .2s;
+  border-radius: 10px;
+  padding: 10px 12px;
+  transition: opacity .2s, border-color .2s;
+  cursor: pointer;
 }
-.pad-row.disabled { opacity: 0.4; }
-.pad-row input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; }
-.pad-row-name { flex: 1; font-size: 12px; font-weight: 500; color: var(--fg); min-width: 0; }
-.pad-row-name span { display: block; font-size: 11px; color: var(--fg3); font-weight: 400; }
+.pad-row:hover { border-color: var(--accent); }
+.pad-row.disabled { opacity: 0.45; }
+.pad-row.disabled:hover { border-color: var(--border); }
+/* checkbox SEMPRE clicável, mesmo com row disabled */
+.pad-row input[type=checkbox] {
+  accent-color: var(--accent);
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+}
+.pad-row-name { font-size: 13px; font-weight: 500; color: var(--fg); min-width: 0; line-height: 1.3; }
+.pad-row-name span { display: block; font-size: 11px; color: var(--fg3); font-weight: 400; margin-top: 1px; }
 .pad-row select {
   font-size: 12px;
   font-weight: 600;
@@ -309,17 +322,18 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 4px 6px;
+  padding: 5px 8px;
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
   outline: none;
   font-family: inherit;
-  min-width: 72px;
+  min-width: 80px;
   font-variant-numeric: tabular-nums;
+  text-align: center;
 }
 .pad-row select:focus { border-color: var(--accent); }
-.pad-row.disabled select { pointer-events: none; }
+.pad-row.disabled select { pointer-events: none; opacity: 0.6; }
 .pad-total-line {
   display: flex;
   justify-content: space-between;
@@ -520,8 +534,18 @@ function buildPadList() {
     `;
     list.appendChild(row);
 
-    row.querySelector('#chk-'+p.id).addEventListener('change', onPadChange);
-    row.querySelector('#pqty-'+p.id).addEventListener('change', onPadChange);
+    const chk = row.querySelector('#chk-'+p.id);
+    const sel = row.querySelector('#pqty-'+p.id);
+
+    chk.addEventListener('change', onPadChange);
+    sel.addEventListener('change', onPadChange);
+
+    // Clicar na row (nome/área) também faz toggle do checkbox
+    row.addEventListener('click', e => {
+      if (e.target === chk || e.target === sel || e.target.closest('select')) return;
+      chk.checked = !chk.checked;
+      onPadChange();
+    });
   });
 }
 
